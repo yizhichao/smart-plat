@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReceiveStudentInfo">
+
+	<resultMap type="com.allcam.pojo.ReceiveStudentInfo" id="ReceiveStudentInfoResult">
+		<result column="Id" jdbcType="VARCHAR" property="id" />
+		<result column="receiveId" jdbcType="VARCHAR" property="receiveId" />
+		<result column="studentId" jdbcType="VARCHAR" property="studentId" />
+		<result column="classId" jdbcType="VARCHAR" property="classId" />
+		<result column="className" jdbcType="VARCHAR" property="className" />
+		<result column="nurId" jdbcType="VARCHAR" property="nurId" />
+		<result column="studentCode" jdbcType="VARCHAR" property="studentCode" />
+		<result column="studentName" jdbcType="VARCHAR" property="studentName" />
+		<result column="cardId" jdbcType="VARCHAR" property="cardId" />
+		<result column="userId" jdbcType="VARCHAR" property="userId" />
+		<result column="userName" jdbcType="VARCHAR" property="userName" />
+		<result column="relationType" jdbcType="VARCHAR" property="relationType" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="photoUrl" jdbcType="VARCHAR" property="photoUrl" />
+		<result column="receiveTime" jdbcType="VARCHAR" property="receiveTime" />
+		<result column="receiveType" jdbcType="VARCHAR" property="receiveType" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+	</resultMap>
+
+	<select id="queryReceiveStudentInfo" parameterType="com.allcam.pojo.ReceiveStudentInfo"
+		resultType="com.allcam.pojo.ReceiveStudentInfo">
+		SELECT * FROM tbl_receive_student_info
+	</select>
+
+	<insert id="addReceiveStudentInfo" parameterType="com.allcam.pojo.ReceiveStudentInfo">
+		insert
+		tbl_receive_student_info(receiveId,studentId,classId,className,nurId,studentCode,studentName,cardId,userId,userName,relationType,mobile,photoUrl,receiveTime,receiveType,content)
+		values(#{receiveId},#{studentId},#{classId},#{className},#{nurId},#{studentCode},#{studentName},#{cardId},#{userId},#{userName},#{relationType},#{mobile},#{photoUrl},#{receiveTime},#{receiveType},#{content})
+	</insert>
+
+	<update id="modReceiveStudentInfo" parameterType="com.allcam.pojo.ReceiveStudentInfo">
+		update
+		tbl_receive_student_info
+		set
+		photoUrl=#{photoUrl}
+		where
+		receiveId=#{receiveId}
+	</update>
+
+	<delete id="delReceiveStudentInfo" parameterType="com.allcam.pojo.ReceiveStudentInfo">
+		delete from
+		tbl_receive_student_info
+		where
+		receiveId=#{receiveId}
+	</delete>
+</mapper>

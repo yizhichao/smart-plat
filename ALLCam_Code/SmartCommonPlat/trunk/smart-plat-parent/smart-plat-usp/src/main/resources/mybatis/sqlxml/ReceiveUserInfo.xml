@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ReceiveUserInfo">
+
+	<resultMap type="com.allcam.pojo.ReceiveUserInfo" id="ReceiveUserInfoResult">
+		<result column="Id" jdbcType="VARCHAR" property="id" />
+		<result column="receiveId" jdbcType="VARCHAR" property="receiveId" />
+		<result column="nurId" jdbcType="VARCHAR" property="nurId" />
+		<result column="cardId" jdbcType="VARCHAR" property="cardId" />
+		<result column="userCode" jdbcType="VARCHAR" property="userCode" />
+		<result column="userId" jdbcType="VARCHAR" property="userId" />
+		<result column="userName" jdbcType="VARCHAR" property="userName" />
+		<result column="mobile" jdbcType="VARCHAR" property="mobile" />
+		<result column="photoUrl" jdbcType="VARCHAR" property="photoUrl" />
+		<result column="receiveTime" jdbcType="VARCHAR" property="receiveTime" />
+		<result column="receiveType" jdbcType="VARCHAR" property="receiveType" />
+	</resultMap>
+
+	<select id="queryReceiveUserInfo" parameterType="com.allcam.pojo.ReceiveUserInfo"
+		resultType="com.allcam.pojo.ReceiveUserInfo">
+		SELECT * FROM tbl_receive_user_info
+	</select>
+
+	<insert id="addReceiveUserInfo" parameterType="com.allcam.pojo.ReceiveUserInfo">
+		insert
+		tbl_receive_user_info(receiveId,nurId,cardId,userCode,userId,userName,mobile,photoUrl,receiveTime,receiveType,content)
+		values(#{receiveId},#{nurId},#{cardId},#{userCode},#{userId},#{userName},#{mobile},#{photoUrl},#{receiveTime},#{receiveType},#{content})
+	</insert>
+
+	<update id="modReceiveUserInfo" parameterType="com.allcam.pojo.ReceiveUserInfo">
+		update
+		tbl_receive_user_info
+		set
+		photoUrl=#{photoUrl}
+		where
+		receiveId=#{receiveId}
+	</update>
+
+	<delete id="delReceiveUserInfo" parameterType="com.allcam.pojo.ReceiveUserInfo">
+		delete from
+		tbl_receive_user_info
+		where
+		receiveId=#{receiveId}
+	</delete>
+</mapper>

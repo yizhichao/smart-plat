@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="UserInfo">
+
+	<resultMap type="com.allcam.pojo.UserInfo" id="UserInfoResult">
+		<result column="USER_ID" jdbcType="VARCHAR" property="userId" />
+		<result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+		<result column="LASTTIME" jdbcType="VARCHAR" property="lastTime" />
+		<result column="ROLE_ID" jdbcType="VARCHAR" property="roleId" />
+		<result column="ORGANIZATION_ID" jdbcType="VARCHAR" property="organizationId" />
+		<result column="SCHOOL_ID" jdbcType="VARCHAR" property="schoolId" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="USER_NAME_PINYIN" jdbcType="VARCHAR" property="userNamePinYin" />
+		<result column="USERCODE" jdbcType="VARCHAR" property="userCode" />
+		<result column="PHONE" jdbcType="VARCHAR" property="phone" />
+		<result column="SHORTPHONE" jdbcType="VARCHAR" property="shortPhone" />
+		<result column="FIXEDPHONE" jdbcType="VARCHAR" property="fixedPhone" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="SEX" jdbcType="VARCHAR" property="sex" />
+		<result column="BIRTHDAY" jdbcType="VARCHAR" property="birthday" />
+		<result column="qq" jdbcType="VARCHAR" property="qq" />
+		<result column="NICKNAME" jdbcType="VARCHAR" property="nickName" />
+		<result column="HOME_ADDRESS" jdbcType="VARCHAR" property="homeAddress" />
+		<result column="POSITION" jdbcType="VARCHAR" property="position" />
+		<result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+		<result column="ACCTYPE" jdbcType="VARCHAR" property="accType" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="POSTCODE" jdbcType="VARCHAR" property="postCode" />
+		<result column="PHOTO" jdbcType="VARCHAR" property="photo" />
+		<result column="OTHER_NUMBER1" jdbcType="VARCHAR" property="otherNumber1" />
+		<result column="OTHER_NUMBER2" jdbcType="VARCHAR" property="otherNumber2" />
+		<result column="ISSHOW" jdbcType="VARCHAR" property="isShow" />
+		<result column="SCHOOL_NAME" jdbcType="VARCHAR" property="schoolName" />
+	</resultMap>
+
+	<select id="getUserInfoByCer" parameterType="com.allcam.pojo.UserInfo"
+		resultMap="UserInfoResult">
+		SELECT
+		t1.USER_ID,t1.LOGIN_NAME,t1.PASSWORD,t1.LASTTIME,t1.ROLE_ID,t1.ORGANIZATION_ID,t1.SCHOOL_ID,t2.USER_NAME,t2.USER_NAME_PINYIN,t2.cardId,t2.USERCODE,t2.PHONE,t2.SHORTPHONE,t2.FIXEDPHONE,t2.EMAIL,t2.SEX,t2.BIRTHDAY,t2.qq,t2.NICKNAME,t2.HOME_ADDRESS,t2.POSITION,t2.ACCTYPE,t2.STATUS,t2.POSTCODE,t2.PHOTO,t2.OTHER_NUMBER1,t2.OTHER_NUMBER2,t2.ISSHOW
+		FROM tbl_user_info t1,tbl_user_extend_info t2 WHERE
+		t1.USER_ID=t2.USER_ID
+		<if test="schoolId!=null and !&quot;&quot;.equals(schoolId.trim())">
+			AND t1.SCHOOL_ID=#{schoolId}
+		</if>
+		<if test="loginName!=null and !&quot;&quot;.equals(loginName.trim())">
+			AND t1.LOGIN_NAME=#{loginName}
+		</if>
+		<if test="userId!=null and !&quot;&quot;.equals(userId.trim())">
+			AND t1.USER_ID=#{userId}
+		</if>
+		<if
+			test="organizationId!=null and !&quot;&quot;.equals(organizationId.trim())">
+			AND t1.ORGANIZATION_ID=#{organizationId}
+		</if>
+		<if test="userName!=null and !&quot;&quot;.equals(userName.trim())">
+			AND t2.USER_NAME='${userName}'
+		</if>
+		<if test="userCode!=null and !&quot;&quot;.equals(userCode.trim())">
+			AND t2.USERCODE='${userCode}'
+		</if>
+		<if test="phone!=null and !&quot;&quot;.equals(phone.trim())">
+			AND t2.PHONE=#{phone}
+		</if>
+		<if test="isShow!=null and !&quot;&quot;.equals(isShow.trim())">
+			AND t2.ISSHOW=#{isShow}
+		</if>
+	</select>
+	<select id="queryUserInfoByPage" parameterType="map" resultMap="UserInfoResult">
+		SELECT
+		t1.USER_ID,t1.LOGIN_NAME,t1.PASSWORD,t1.LASTTIME,t1.ROLE_ID,t1.ORGANIZATION_ID,t1.SCHOOL_ID,t2.USER_NAME,t2.USER_NAME_PINYIN,t2.USERCODE,t2.PHONE,t2.SHORTPHONE,t2.FIXEDPHONE,t2.EMAIL,t2.SEX,t2.BIRTHDAY,t2.qq,t2.NICKNAME,t2.HOME_ADDRESS,t2.POSITION,t2.ACCTYPE,t2.STATUS,t2.POSTCODE,t2.PHOTO,t2.OTHER_NUMBER1,t2.OTHER_NUMBER2,t2.ISSHOW
+		FROM tbl_user_info t1,tbl_user_extend_info t2 WHERE
+		t1.USER_ID=t2.USER_ID
+		<if
+			test="userInfo.loginName!=null and !&quot;&quot;.equals(userInfo.loginName.trim())">
+			AND t1.LOGIN_NAME=#{userInfo.loginName}
+		</if>
+		<if
+			test="userInfo.userId!=null and !&quot;&quot;.equals(userInfo.userId.trim())">
+			AND t1.USER_ID=#{userInfo.userId}
+		</if>
+		<if
+			test="userInfo.schoolId!=null and !&quot;&quot;.equals(userInfo.schoolId.trim())">
+			AND t1.SCHOOL_ID=#{userInfo.schoolId}
+		</if>
+		<if
+			test="userInfo.userName!=null and !&quot;&quot;.equals(userInfo.userName.trim())">
+			AND t2.USER_NAME LIKE '%${userInfo.userName}%'
+		</if>
+		<if
+			test="userInfo.userNamePinYin!=null and !&quot;&quot;.equals(userInfo.userNamePinYin.trim())">
+			AND t2.USER_NAME_PINYIN LIKE '%${userInfo.userNamePinYin}%'
+		</if>
+		<if
+			test="userInfo.phone!=null and !&quot;&quot;.equals(userInfo.phone.trim())">
+			AND t2.PHONE LIKE '%${userInfo.phone}%'
+		</if>
+		<if
+			test="userInfo.shortPhone!=null and !&quot;&quot;.equals(userInfo.shortPhone.trim())">
+			AND t2.SHORTPHONE LIKE '%${userInfo.shortPhone}%'
+		</if>
+		<if
+			test="userInfo.fixedPhone!=null and !&quot;&quot;.equals(userInfo.fixedPhone.trim())">
+			AND t2.FIXEDPHONE LIKE '%${userInfo.fixedPhone}%'
+		</if>
+		<if
+			test="userInfo.userCode!=null and !&quot;&quot;.equals(userInfo.userCode.trim())">
+			AND t2.USERCODE LIKE '%${userInfo.userCode}%'
+		</if>
+		<if
+			test="userInfo.organizationId!=null and !&quot;&quot;.equals(userInfo.organizationId.trim())">
+			AND t1.ORGANIZATION_ID=#{userInfo.organizationId}
+		</if>
+		<if
+			test="userInfo.isShow!=null and !&quot;&quot;.equals(userInfo.isShow.trim())">
+			AND t2.ISSHOW=#{userInfo.isShow}
+		</if>
+		order by t1.LASTTIME desc
+	</select>
+	<!-- <select id="queryUserInfoByCer" parameterType="map" resultMap="UserInfoResult">
+		SELECT
+		t1.USER_ID,t1.LOGIN_NAME,t1.PASSWORD,t1.LASTTIME,t1.ROLE_ID,t1.ORGANIZATION_ID,t1.SCHOOL_ID,t2.USER_NAME,t2.USER_NAME_PINYIN,t2.USERCODE,t2.PHONE,t2.SHORTPHONE,t2.FIXEDPHONE,t2.EMAIL,t2.SEX,t2.BIRTHDAY,t2.qq,t2.NICKNAME,t2.HOME_ADDRESS,t2.POSITION,t2.ACCTYPE,t2.STATUS,t2.POSTCODE,t2.PHOTO,t2.OTHER_NUMBER1,t2.OTHER_NUMBER2,t2.ISSHOW
+		FROM tbl_user_info t1,tbl_user_extend_info t2 WHERE
+		t1.USER_ID=t2.USER_ID
+		<if
+			test="userInfo.loginName!=null and !&quot;&quot;.equals(userInfo.loginName.trim())">
+			AND t1.LOGIN_NAME=#{userInfo.loginName}
+		</if>
+		<if
+			test="userInfo.userId!=null and !&quot;&quot;.equals(userInfo.userId.trim())">
+			AND t1.USER_ID=#{userInfo.userId}
+		</if>
+		<if
+			test="userInfo.schoolId!=null and !&quot;&quot;.equals(userInfo.schoolId.trim())">
+			AND t1.SCHOOL_ID=#{userInfo.schoolId}
+		</if>
+		<if
+			test="userInfo.userName!=null and !&quot;&quot;.equals(userInfo.userName.trim())">
+			AND t2.USER_NAME LIKE '%${userInfo.userName}%'
+		</if>
+		<if
+			test="userInfo.userNamePinYin!=null and !&quot;&quot;.equals(userInfo.userNamePinYin.trim())">
+			AND t2.USER_NAME_PINYIN LIKE '%${userInfo.userNamePinYin}%'
+		</if>
+		<if
+			test="userInfo.phone!=null and !&quot;&quot;.equals(userInfo.phone.trim())">
+			AND t2.PHONE LIKE '%${userInfo.phone}%'
+		</if>
+		<if
+			test="userInfo.shortPhone!=null and !&quot;&quot;.equals(userInfo.shortPhone.trim())">
+			AND t2.SHORTPHONE LIKE '%${userInfo.shortPhone}%'
+		</if>
+		<if
+			test="userInfo.fixedPhone!=null and !&quot;&quot;.equals(userInfo.fixedPhone.trim())">
+			AND t2.FIXEDPHONE LIKE '%${userInfo.fixedPhone}%'
+		</if>
+		<if
+			test="userInfo.userCode!=null and !&quot;&quot;.equals(userInfo.userCode.trim())">
+			AND t2.USERCODE LIKE '%${userInfo.userCode}%'
+		</if>
+		<if
+			test="userInfo.organizationId!=null and !&quot;&quot;.equals(userInfo.organizationId.trim())">
+			AND t1.ORGANIZATION_ID=#{userInfo.organizationId}
+		</if>
+		<if
+			test="userInfo.isShow!=null and !&quot;&quot;.equals(userInfo.isShow.trim())">
+			AND t2.ISSHOW=#{userInfo.isShow}
+		</if>
+		order by t1.LASTTIME desc
+	</select> -->
+	<select id="queryDeviceSyncTeacherByPage" parameterType="map"
+		resultMap="UserInfoResult">
+		SELECT
+		t2.USER_ID,t2.USER_NAME,t2.USER_NAME_PINYIN,t2.USERCODE,t2.cardId,t2.PHONE,t2.SHORTPHONE,t2.FIXEDPHONE,t2.EMAIL,t2.SEX,t2.BIRTHDAY,t2.qq,t2.NICKNAME,t2.HOME_ADDRESS,t2.POSITION,t2.ACCTYPE,t2.STATUS,t2.POSTCODE,t2.PHOTO,t2.OTHER_NUMBER1,t2.OTHER_NUMBER2,t2.ISSHOW
+		FROM tbl_device_user_map t1,tbl_user_extend_info t2 WHERE
+		t1.userId=t2.USER_ID and t1.nurId=#{req.schoolId}
+		and
+		t1.deviceId=#{req.deviceId}
+		order by t1.serialNum DESC
+	</select>
+	<select id="searchUserInfoByPage" parameterType="map" resultMap="UserInfoResult">
+		SELECT
+		t1.USER_ID,t1.LOGIN_NAME,t1.PASSWORD,t1.LASTTIME,t1.ROLE_ID,t1.ORGANIZATION_ID,t1.SCHOOL_ID,t2.USER_NAME,t2.USER_NAME_PINYIN,t2.USERCODE,t2.PHONE,t2.SHORTPHONE,t2.FIXEDPHONE,t2.EMAIL,t2.SEX,t2.BIRTHDAY,t2.qq,t2.NICKNAME,t2.HOME_ADDRESS,t2.POSITION,t2.ACCTYPE,t2.STATUS,t2.POSTCODE,t2.PHOTO,t2.OTHER_NUMBER1,t2.OTHER_NUMBER2,t2.ISSHOW
+		FROM tbl_user_info t1,tbl_user_extend_info t2 WHERE
+		t1.USER_ID=t2.USER_ID
+		<if
+			test="userInfo.organizationId!=null and !&quot;&quot;.equals(userInfo.organizationId.trim())">
+			AND t1.ORGANIZATION_ID=#{userInfo.organizationId}
+		</if>
+		<if
+			test="userInfo.schoolId!=null and !&quot;&quot;.equals(userInfo.schoolId.trim())">
+			and t1.SCHOOL_ID='${userInfo.schoolId}'
+		</if>
+		<if test="value!=null and !&quot;&quot;.equals(value.trim())">
+			and (t2.USER_NAME LIKE '%${value}%' or t2.USER_NAME_PINYIN
+			LIKE '%${value}%' or t2.PHONE LIKE '%${value}%' or t2.SHORTPHONE LIKE
+			'%${value}%' or t2.FIXEDPHONE LIKE '%${value}%' or t2.USERCODE LIKE
+			'%${value}%')
+		</if>
+		<if test="hiddenAdmin!=null and !&quot;&quot;.equals(hiddenAdmin.trim())">
+			and t1.LOGIN_NAME != 'administrator'
+		</if>
+		<if
+			test="userInfo.isShow!=null and !&quot;&quot;.equals(userInfo.isShow.trim())">
+			AND t2.ISSHOW=#{userInfo.isShow}
+		</if>
+		order by t1.LASTTIME desc
+	</select>
+	<insert id="addUserInfo" parameterType="com.allcam.pojo.UserInfo">
+		insert into
+		tbl_user_info(USER_ID,LOGIN_NAME,PASSWORD,LASTTIME,ROLE_ID,ORGANIZATION_ID,SCHOOL_ID)
+		values(#{userId},#{loginName},#{password},#{lastTime},#{roleId},#{organizationId},#{schoolId})
+	</insert>
+
+	<insert id="addUserExtendInfo" parameterType="com.allcam.pojo.UserInfo">
+		insert into
+		tbl_user_extend_info(USER_ID,USER_NAME,USER_NAME_PINYIN,cardId,USERCODE,PHONE,SHORTPHONE,FIXEDPHONE,EMAIL,SEX,BIRTHDAY,qq,NICKNAME,HOME_ADDRESS,POSITION,ACCTYPE,STATUS,POSTCODE,PHOTO,OTHER_NUMBER1,OTHER_NUMBER2,ISSHOW)
+		values(#{userId},#{userName},#{userNamePinYin},#{cardId},#{userCode},#{phone},#{shortPhone},#{fixedPhone},#{email},#{sex},#{birthday},#{qq},#{nickName},#{homeAddress},#{position},#{accType},#{status},#{postCode},#{photo},#{otherNumber1},#{otherNumber2},#{isShow})
+	</insert>
+
+	<update id="updateUserInfo" parameterType="com.allcam.pojo.UserInfo">
+		update tbl_user_info set USER_ID=#{userId}
+		<if test="loginName!=null and !&quot;&quot;.equals(loginName.trim())">
+			,LOGIN_NAME=#{loginName}
+		</if>
+		<if test="roleId!=null and !&quot;&quot;.equals(roleId.trim())">
+			,ROLE_ID=#{roleId}
+		</if>
+		<if
+			test="organizationId!=null and !&quot;&quot;.equals(organizationId.trim())">
+			,ORGANIZATION_ID=#{organizationId}
+		</if>
+		<if test="schoolId!=null and !&quot;&quot;.equals(schoolId.trim())">
+			,SCHOOL_ID=#{schoolId}
+		</if>
+		<if test="password!=null and !&quot;&quot;.equals(password.trim())">
+			,PASSWORD=#{password}
+		</if>
+		<if test="lastTime!=null and !&quot;&quot;.equals(lastTime.trim())">
+			,LASTTIME=#{lastTime}
+		</if>
+		where USER_ID=#{userId}
+	</update>
+
+	<update id="updateUserExtInfo" parameterType="com.allcam.pojo.UserInfo">
+		update tbl_user_extend_info set cardId=#{cardId}
+		<if test="userName!=null and !&quot;&quot;.equals(userName.trim())">
+			,USER_NAME=#{userName}
+		</if>
+		<if
+			test="userNamePinYin!=null and !&quot;&quot;.equals(userNamePinYin.trim())">
+			,USER_NAME_PINYIN=#{userNamePinYin}
+		</if>
+		<if test="userCode!=null and !&quot;&quot;.equals(userCode.trim())">
+			,USERCODE=#{userCode}
+		</if>
+		<if test="phone!=null and !&quot;&quot;.equals(phone.trim())">
+			,PHONE=#{phone}
+		</if>
+		<if test="shortPhone!=null and !&quot;&quot;.equals(shortPhone.trim())">
+			,SHORTPHONE=#{shortPhone}
+		</if>
+		<if test="fixedPhone!=null and !&quot;&quot;.equals(fixedPhone.trim())">
+			,FIXEDPHONE=#{fixedPhone}
+		</if>
+		<if test="email!=null and !&quot;&quot;.equals(email.trim())">
+			,EMAIL=#{email}
+		</if>
+		<if test="sex!=null and !&quot;&quot;.equals(sex.trim())">
+			,SEX=#{sex}
+		</if>
+		<if test="birthday!=null and !&quot;&quot;.equals(birthday.trim())">
+			,BIRTHDAY=#{birthday}
+		</if>
+		<if test="qq!=null and !&quot;&quot;.equals(qq.trim())">
+			,qq=#{qq}
+		</if>
+		<if test="nickName!=null and !&quot;&quot;.equals(nickName.trim())">
+			,NICKNAME=#{nickName}
+		</if>
+		<if test="homeAddress!=null and !&quot;&quot;.equals(homeAddress.trim())">
+			,HOME_ADDRESS=#{homeAddress}
+		</if>
+		<if test="position!=null and !&quot;&quot;.equals(position.trim())">
+			,POSITION=#{position}
+		</if>
+		<if test="accType!=null and !&quot;&quot;.equals(accType.trim())">
+			,ACCTYPE=#{accType}
+		</if>
+		<if test="status!=null and !&quot;&quot;.equals(status.trim())">
+			,STATUS=#{status}
+		</if>
+		<if test="postCode!=null and !&quot;&quot;.equals(postCode.trim())">
+			,POSTCODE=#{postCode}
+		</if>
+		<if test="photo!=null and !&quot;&quot;.equals(photo.trim())">
+			,PHOTO=#{photo}
+		</if>
+		<if test="otherNumber1!=null and !&quot;&quot;.equals(otherNumber1.trim())">
+			,OTHER_NUMBER1=#{otherNumber1}
+		</if>
+		<if test="otherNumber2!=null and !&quot;&quot;.equals(otherNumber2.trim())">
+			,OTHER_NUMBER2=#{otherNumber2}
+		</if>
+		<if test="isShow!=null and !&quot;&quot;.equals(isShow.trim())">
+			,ISSHOW=#{isShow}
+		</if>
+		where USER_ID=#{userId}
+	</update>
+
+	<delete id="delUserInfo" parameterType="com.allcam.pojo.UserInfo">
+		delete from
+		tbl_user_info
+		where
+		USER_ID=#{userId}
+	</delete>
+	<delete id="delUserExtendInfo" parameterType="com.allcam.pojo.UserInfo">
+		delete from
+		tbl_user_extend_info
+		where
+		USER_ID=#{userId}
+	</delete>
+
+	<select id="queryUserInfo" parameterType="map" resultMap="UserInfoResult">
+		SELECT
+		s.*,t.*,m.SCHOOL_NAME
+		FROM tbl_user_info s,tbl_user_extend_info
+		t,tbl_school_info m WHERE
+		s.USER_ID=t.USER_ID AND
+		s.SCHOOL_ID=m.SCHOOL_ID
+		<if test="aoData!=null">
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (t.USER_NAME like "%"#{aoData.sSearch}"%" OR t.USERCODE
+				like "%"#{aoData.sSearch}"%" OR t.PHONE like "%"#{aoData.sSearch}"%"
+				OR t.CardId like "%"#{aoData.sSearch}"%")
+			</if>
+			<if
+				test="aoData.sSortCol_!=null and !&quot;&quot;.equals(aoData.sSortCol_.trim())">
+				ORDER BY ${aoData.sSortCol_} ${aoData.sSortDir_}
+			</if>
+			LIMIT #{aoData.iDisplayStart},#{aoData.iDisplayLength}
+		</if>
+	</select>
+
+	<select id="queryUserTotal" parameterType="map" resultType="Integer">
+		SELECT
+		count(1)
+		FROM tbl_user_info s,tbl_user_extend_info
+		t,tbl_school_info m WHERE
+		s.USER_ID=t.USER_ID AND
+		s.SCHOOL_ID=m.SCHOOL_ID
+		<if test="aoData!=null">
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (t.USER_NAME like "%"#{aoData.sSearch}"%" OR t.USERCODE
+				like "%"#{aoData.sSearch}"%" OR t.PHONE like "%"#{aoData.sSearch}"%"
+				OR t.CardId like "%"#{aoData.sSearch}"%")
+			</if>
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PlatInfo">
+	<resultMap type="com.allcam.modules.plat.model.PlatInfo" id="platInfoResult">
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ZONEID" jdbcType="VARCHAR" property="zoneId" />
+		<result column="ZONENAME" jdbcType="VARCHAR" property="zoneName" />
+		<result column="plATID" jdbcType="VARCHAR" property="platId" />
+		<result column="plATTYPE" jdbcType="VARCHAR" property="plaType" />
+		<result column="platNAME" jdbcType="VARCHAR" property="platName" />
+		<result column="plATIP" jdbcType="VARCHAR" property="platIp" />
+		<result column="plATPORT" jdbcType="VARCHAR" property="platPort" />
+		<result column="plATVERSION" jdbcType="VARCHAR" property="platVersion" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="CREATEDATE" jdbcType="VARCHAR" property="createDate" />
+		<result column="LASTDATE" jdbcType="VARCHAR" property="lastDate" />
+	</resultMap>
+
+	<insert id="addPlatInfo" parameterType="com.allcam.modules.plat.model.PlatInfo">
+		insert into
+		tbl_plat_info(ZONEID,PLATID,PLATTYPE,PLATNAME,PLATIP,PLATPORT,PLATVERSION,STATUS,REMARK,CREATEDATE,LASTDATE)
+		values(#{zoneId},#{platId},#{platType},#{platName},#{platIp},#{platPort},#{platVersion},#{status},#{remark},#{createDate},#{lastDate})
+	</insert>
+	<insert id="addZonePlatMap" parameterType="com.allcam.modules.plat.model.PlatInfo">
+		insert into
+		tbl_zone_plat_map(ZONEID,PLATID)
+		values(#{zoneId},#{platId})
+	</insert>
+	<update id="delPlatInfo" parameterType="com.allcam.modules.plat.model.PlatInfo">
+		update tbl_plat_info set
+		status='3'
+		where PLATID=#{platId}
+	</update>
+	<update id="modPlatInfo" parameterType="com.allcam.modules.plat.model.PlatInfo">
+		update tbl_plat_info set LASTDATE='${lastDate}'
+		<if test="platName!=null and !&quot;&quot;.equals(platName.trim())">
+			,PLATNAME=#{platName}
+		</if>
+		<if test="platType!=null and !&quot;&quot;.equals(platType.trim())">
+			,PLATTYPE=#{platCode}
+		</if>
+		<if test="platIp!=null and !&quot;&quot;.equals(platIp.trim())">
+			,PLATIP=#{platIp}
+		</if>
+		<if test="platPort!=null and !&quot;&quot;.equals(platPort.trim())">
+			,PLATPORT=#{platPort}
+		</if>
+		<if test="platVersion!=null and !&quot;&quot;.equals(platVersion.trim())">
+			,PLATVERSION=#{platVersion}
+		</if>
+		<if test="status!=null">
+			,STATUS=#{status}
+		</if>
+		<if test="remark!=null and !&quot;&quot;.equals(remark.trim())">
+			,REMARK=#{remark}
+		</if>
+		where PLATID=#{platId}
+	</update>
+	<select id="queryPlatInfoListByPage" parameterType="map"
+		resultMap="platInfoResult">
+		select * from tbl_plat_info where status!='3'
+		<if
+			test="platInfo.PlatName!=null and !&quot;&quot;.equals(PlatInfo.PlatName.trim())">
+			and PlatNAME like '%#{platInfo.PlatName}%'
+		</if>
+	</select>
+	<select id="getPlatInfo" parameterType="map" resultMap="platInfoResult">
+		select *
+		from tbl_plat_info where status!='3' AND PLATID=#{platId}
+	</select>
+
+
+	<select id="queryPlatInfoList" parameterType="map"
+		resultType="com.allcam.modules.plat.model.PlatInfo">
+		select z.ZONENAME,p.* from tbl_zone_info z,tbl_plat_info p where
+		z.zoneId=p.zoneId
+		<if test="aoData!=null">
+			<if
+				test="aoData.sZoneId!=null and !&quot;&quot;.equals(aoData.sZoneId.trim())">
+				AND p.zoneId=#{aoData.sZoneId}
+			</if>
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (
+				p.platName like
+				"%"#{aoData.sSearch}"%" OR z.ZONENAME
+				like
+				"%"#{aoData.sSearch}"%")
+			</if>
+		</if>
+		<if
+			test="aoData.sSortCol_!=null and !&quot;&quot;.equals(aoData.sSortCol_.trim())">
+			ORDER BY ${aoData.sSortCol_} ${aoData.sSortDir_}
+		</if>
+		LIMIT #{aoData.iDisplayStart},#{aoData.iDisplayLength}
+	</select>
+
+	<select id="queryPlatInfoTotal" parameterType="map" resultType="Integer">
+		SELECT COUNT(1) FROM
+		(
+		select z.ZONENAME,p.* from tbl_zone_info
+		z,tbl_plat_info p where
+		z.zoneId=p.zoneId
+		<if test="aoData!=null">
+			<if
+				test="aoData.sZoneId!=null and !&quot;&quot;.equals(aoData.sZoneId.trim())">
+				AND p.zoneId=#{aoData.sZoneId}
+			</if>
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (
+				p.platName like
+				"%"#{aoData.sSearch}"%" OR z.ZONENAME
+				like
+				"%"#{aoData.sSearch}"%")
+			</if>
+		</if>
+		<if
+			test="aoData.sSortCol_!=null and !&quot;&quot;.equals(aoData.sSortCol_.trim())">
+			ORDER BY ${aoData.sSortCol_} ${aoData.sSortDir_}
+		</if>
+		) a
+	</select>
+</mapper>

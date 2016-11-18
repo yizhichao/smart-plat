@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TaskInfo">
+
+	<resultMap type="com.allcam.pojo.TaskInfo" id="TaskInfoResult">
+		<result column="Id" jdbcType="VARCHAR" property="id" />
+		<result column="nurId" jdbcType="VARCHAR" property="nurId" />
+		<result column="nurName" jdbcType="VARCHAR" property="nurName" />
+		<result column="deviceId" jdbcType="VARCHAR" property="deviceId" />
+		<result column="taskId" jdbcType="VARCHAR" property="taskId" />
+		<result column="taskName" jdbcType="VARCHAR" property="taskName" />
+		<result column="taskValue" jdbcType="VARCHAR" property="taskValue" />
+		<result column="taskType" jdbcType="VARCHAR" property="taskType" />
+		<result column="status" jdbcType="VARCHAR" property="status" />
+		<result column="taskData" jdbcType="VARCHAR" property="taskData" />
+		<result column="taskServerUrl" jdbcType="VARCHAR" property="taskServerUrl" />
+		<result column="createDate" jdbcType="VARCHAR" property="createDate" />
+		<result column="lastDate" jdbcType="VARCHAR" property="lastDate" />
+	</resultMap>
+
+	<select id="queryTaskInfo" parameterType="com.allcam.pojo.TaskInfo"
+		resultType="com.allcam.pojo.TaskInfo">
+		SELECT * FROM tbl_task_info task,tbl_task_school_device_map map WHERE
+		task.taskId=map.taskId
+		<if test="taskId!=null and !&quot;&quot;.equals(taskId.trim())">
+			AND taskId=#{taskId}
+		</if>
+		<if test="deviceId!=null and !&quot;&quot;.equals(deviceId.trim())">
+			AND deviceId=#{deviceId}
+		</if>
+	</select>
+
+	<insert id="addTaskInfo" parameterType="com.allcam.pojo.TaskInfo">
+		insert
+		tbl_task_info(taskId,taskName,taskValue,taskType,taskData,taskServerUrl,createDate)
+		values(#{taskId},#{taskName},#{taskValue},#{taskType},#{taskData},#{taskServerUrl},#{createDate})
+	</insert>
+
+	<update id="modTaskInfo" parameterType="com.allcam.pojo.TaskInfo">
+		update
+		tbl_Task_info
+		set
+		taskName=#{taskName},taskValue=#{taskValue},taskType=#{taskType},taskData=#{taskData},taskServerUrl=#{taskServerUrl},lastDate=#{lastDate}
+		where
+		taskId=#{taskId}
+	</update>
+
+	<delete id="delTaskInfo" parameterType="com.allcam.pojo.TaskInfo">
+		delete from
+		tbl_Task_info
+		where
+		taskId=#{taskId}
+	</delete>
+	<delete id="delTaskMapInfo" parameterType="com.allcam.pojo.TaskInfo">
+		delete from
+		tbl_task_school_device_map
+		where
+		taskId=#{taskId}
+	</delete>
+</mapper>

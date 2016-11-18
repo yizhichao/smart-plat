@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SchoolInfo">
+	<resultMap type="com.allcam.pojo.SchoolInfo" id="SchoolInfoResult">
+		<result column="SCHOOL_ID" jdbcType="VARCHAR" property="schoolId" />
+		<result column="SCHOOL_NAME" jdbcType="VARCHAR" property="schoolName" />
+		<result column="SCHOOL_ADDRESS" jdbcType="VARCHAR" property="schoolAddress" />
+		<result column="SCHOOL_REGION" jdbcType="VARCHAR" property="schoolRegion" />
+		<result column="SCHOOL_COUNTY" jdbcType="VARCHAR" property="schoolCounty" />
+		<result column="SCHOOL_CITY" jdbcType="VARCHAR" property="schoolCity" />
+		<result column="SCHOOL_PROVINCE" jdbcType="VARCHAR" property="schoolProvince" />
+		<result column="SCHOOL_LOGO" jdbcType="VARCHAR" property="schoolLogo" />
+		<result column="SCHOOL_HOME" jdbcType="VARCHAR" property="schoolHome" />
+		<result column="ANONYMOUSNAME" jdbcType="VARCHAR" property="anonymousName" />
+		<result column="SORT" jdbcType="VARCHAR" property="sort" />
+		<result column="BPMSERVERURL" jdbcType="VARCHAR" property="bpmServerUrl" />
+		<result column="BPCSERVERURL" jdbcType="VARCHAR" property="bpcServerUrl" />
+		<result column="BPCHTTPSSERVERURL" jdbcType="VARCHAR" property="bpcHttpsServerUrl" />
+	</resultMap>
+
+	<insert id="addSchoolInfo" parameterType="com.allcam.pojo.SchoolInfo">
+		insert into
+		tbl_school_info(SCHOOL_ID,SCHOOL_NAME,SCHOOL_ADDRESS,SCHOOL_REGION,SCHOOL_COUNTY,SCHOOL_CITY,SCHOOL_PROVINCE,SCHOOL_LOGO,SCHOOL_HOME,ANONYMOUSNAME,SORT,BPMSERVERURL,BPCSERVERURL,BPCHTTPSSERVERURL)
+		values(#{schoolId},#{schoolName},#{schoolAddress},#{schoolRegion},#{schoolCounty},#{schoolCity},#{schoolProvince},#{schoolLogo},#{schoolHome},#{anonymousName},#{sort},#{bpmServerUrl},#{bpcServerUrl},#{bpcHttpsServerUrl})
+	</insert>
+	<delete id="deleteSchoolInfo" parameterType="com.allcam.pojo.SchoolInfo">
+		delete from
+		tbl_school_info where SCHOOL_ID='#{schoolId}'
+	</delete>
+	<update id="updateSchoolInfo" parameterType="com.allcam.pojo.SchoolInfo">
+		update tbl_school_info set SCHOOL_ID='${schoolId}'
+		<if test="schoolName!=null and !&quot;&quot;.equals(schoolName.trim())">
+			,SCHOOL_NAME=#{schoolName}
+		</if>
+		<if
+			test="schoolAddress!=null and !&quot;&quot;.equals(schoolAddress.trim())">
+			,SCHOOL_ADDRESS=#{schoolAddress}
+		</if>
+		<if test="schoolRegion!=null and !&quot;&quot;.equals(schoolRegion.trim())">
+			,SCHOOL_REGION=#{schoolRegion}
+		</if>
+		<if test="schoolCounty!=null and !&quot;&quot;.equals(schoolCounty.trim())">
+			,SCHOOL_COUNTY=#{schoolCounty}
+		</if>
+		<if test="schoolCity!=null and !&quot;&quot;.equals(schoolCity.trim())">
+			,SCHOOL_CITY=#{schoolCity}
+		</if>
+		<if
+			test="schoolProvince!=null and !&quot;&quot;.equals(schoolProvince.trim())">
+			,SCHOOL_PROVINCE=#{schoolName}
+		</if>
+		<if test="schoolLogo!=null and !&quot;&quot;.equals(schoolLogo.trim())">
+			,SCHOOL_LOGO=#{schoolLogo}
+		</if>
+		<if
+			test="anonymousName!=null and !&quot;&quot;.equals(anonymousName.trim())">
+			,ANONYMOUSNAME=#{anonymousName}
+		</if>
+		<if test="sort!=null and !&quot;&quot;.equals(sort.trim())">
+			,SORT=#{sort}
+		</if>
+		<if test="bpmServerUrl!=null and !&quot;&quot;.equals(bpmServerUrl.trim())">
+			,BPMSERVERURL=#{bpmServerUrl}
+		</if>
+		<if test="bpcServerUrl!=null and !&quot;&quot;.equals(bpcServerUrl.trim())">
+			,BPCSERVERURL=#{bpcServerUrl}
+		</if>
+		<if
+			test="bpcHttpsServerUrl!=null and !&quot;&quot;.equals(bpcHttpsServerUrl.trim())">
+			,BPCHTTPSSERVERURL=#{bpcHttpsServerUrl}
+		</if>
+		where SCHOOL_ID='${schoolId}'
+	</update>
+	<select id="querySchoolInfoByPage" parameterType="map"
+		resultMap="SchoolInfoResult">
+		select
+		SCHOOL_ID,SCHOOL_NAME,SCHOOL_ADDRESS,SCHOOL_REGION,SCHOOL_COUNTY,SCHOOL_CITY,SCHOOL_PROVINCE,SCHOOL_LOGO,SCHOOL_HOME,ANONYMOUSNAME,SORT,BPMSERVERURL,BPCSERVERURL,BPCHTTPSSERVERURL
+		from tbl_school_info where 1=1
+		<if
+			test="schoolInfo.schoolId!=null and !&quot;&quot;.equals(schoolInfo.schoolId.trim())">
+			and SCHOOL_ID=#{schoolInfo.schoolId}
+		</if>
+		<if
+			test="schoolInfo.schoolName!=null and !&quot;&quot;.equals(schoolInfo.schoolName.trim())">
+			and SCHOOL_NAME=#{schoolInfo.schoolName}
+		</if>
+		<if
+			test="schoolInfo.schoolAddress!=null and !&quot;&quot;.equals(schoolInfo.schoolAddress.trim())">
+			and SCHOOL_ADDRESS=#{schoolInfo.schoolAddress}
+		</if>
+		<if
+			test="schoolInfo.schoolRegion!=null and !&quot;&quot;.equals(schoolInfo.schoolRegion.trim())">
+			and SCHOOL_REGION=#{schoolInfo.schoolRegion}
+		</if>
+		<if
+			test="schoolInfo.schoolCounty!=null and !&quot;&quot;.equals(schoolInfo.schoolCounty.trim())">
+			and SCHOOL_COUNTY=#{schoolInfo.schoolCounty}
+		</if>
+		<if
+			test="schoolInfo.schoolCity!=null and !&quot;&quot;.equals(schoolInfo.schoolCity.trim())">
+			and SCHOOL_CITY=#{schoolInfo.schoolCity}
+		</if>
+		<if
+			test="schoolInfo.schoolProvince!=null and !&quot;&quot;.equals(schoolInfo.schoolProvince.trim())">
+			and SCHOOL_PROVINCE=#{schoolInfo.schoolName}
+		</if>
+		<if
+			test="schoolInfo.schoolLogo!=null and !&quot;&quot;.equals(schoolInfo.schoolLogo.trim())">
+			and SCHOOL_LOGO=#{schoolInfo.schoolLogo}
+		</if>
+		<if
+			test="schoolInfo.anonymousName!=null and !&quot;&quot;.equals(schoolInfo.anonymousName.trim())">
+			and ANONYMOUSNAME=#{schoolInfo.anonymousName}
+		</if>
+		<if
+			test="schoolInfo.sort!=null and !&quot;&quot;.equals(schoolInfo.sort.trim())">
+			and SORT=#{schoolInfo.sort}
+		</if>
+		<if
+			test="schoolInfo.bpmServerUrl!=null and !&quot;&quot;.equals(schoolInfo.bpmServerUrl.trim())">
+			and BPMSERVERURL=#{schoolInfo.bpmServerUrl}
+		</if>
+		<if
+			test="schoolInfo.bpcServerUrl!=null and !&quot;&quot;.equals(schoolInfo.bpcServerUrl.trim())">
+			and BPCSERVERURL=#{schoolInfo.bpcServerUrl}
+		</if>
+		<if
+			test="schoolInfo.bpcHttpsServerUrl!=null and !&quot;&quot;.equals(schoolInfo.bpcHttpsServerUrl.trim())">
+			and BPCHTTPSSERVERURL=#{schoolInfo.bpcHttpsServerUrl}
+		</if>
+	</select>
+	<select id="queryOneSchoolInfoByCer" parameterType="String"
+		resultMap="SchoolInfoResult">
+		select
+		SCHOOL_ID,SCHOOL_NAME,SCHOOL_ADDRESS,SCHOOL_REGION,SCHOOL_COUNTY,SCHOOL_CITY,SCHOOL_PROVINCE,SCHOOL_LOGO,SCHOOL_HOME,ANONYMOUSNAME,SORT,BPMSERVERURL,BPCSERVERURL,BPCHTTPSSERVERURL
+		from tbl_school_info where SCHOOL_ID=#{schoolId}
+	</select>
+
+	<select id="querySchoolInfo" parameterType="map"
+		resultMap="SchoolInfoResult">
+		SELECT * FROM tbl_school_info WHERE 1=1
+		<if test="aoData!=null">
+			<if
+				test="aoData.sSchoolId!=null and !&quot;&quot;.equals(aoData.sSchoolId.trim())">
+				AND SCHOOL_ID=#{aoData.sSchoolId}
+			</if>
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (SCHOOL_NAME like "%"#{aoData.sSearch}"%" OR SCHOOL_HOME
+				like "%"#{aoData.sSearch}"%" OR SCHOOL_ADDRESS like
+				"%"#{aoData.sSearch}"%" OR BPMSERVERURL like "%"#{aoData.sSearch}"%"
+				OR BPCSERVERURL like "%"#{aoData.sSearch}"%")
+			</if>
+			<if
+				test="aoData.sSortCol_!=null and !&quot;&quot;.equals(aoData.sSortCol_.trim())">
+				ORDER BY ${aoData.sSortCol_} ${aoData.sSortDir_}
+			</if>
+			LIMIT #{aoData.iDisplayStart},#{aoData.iDisplayLength}
+		</if>
+	</select>
+
+	<select id="querySchoolTotal" parameterType="map" resultType="Integer">
+		SELECT COUNT(1) FROM tbl_school_info WHERE 1=1
+		<if test="aoData!=null">
+			<if
+				test="aoData.sSchoolId!=null and !&quot;&quot;.equals(aoData.sSchoolId.trim())">
+				AND SCHOOL_ID=#{aoData.sSchoolId}
+			</if>
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (SCHOOL_NAME like "%"#{aoData.sSearch}"%" OR SCHOOL_HOME
+				like "%"#{aoData.sSearch}"%" OR SCHOOL_ADDRESS like
+				"%"#{aoData.sSearch}"%" OR BPMSERVERURL like "%"#{aoData.sSearch}"%"
+				OR BPCSERVERURL like "%"#{aoData.sSearch}"%")
+			</if>
+		</if>
+	</select>
+</mapper>

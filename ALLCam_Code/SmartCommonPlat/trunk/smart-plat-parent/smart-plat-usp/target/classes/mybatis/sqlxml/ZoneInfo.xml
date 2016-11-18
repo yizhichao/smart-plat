@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ZoneInfo">
+	<resultMap type="com.allcam.modules.zone.model.ZoneInfo" id="ZoneInfoResult">
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ZONEID" jdbcType="VARCHAR" property="zoneId" />
+		<result column="ZONENAME" jdbcType="VARCHAR" property="zoneName" />
+		<result column="PARENTID" jdbcType="VARCHAR" property="parentId" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="ZONECODE" jdbcType="VARCHAR" property="zoneCode" />
+		<result column="ZONEINFO" jdbcType="VARCHAR" property="zoneInfo" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="CREATEDATE" jdbcType="VARCHAR" property="createDate" />
+		<result column="LASTDATE" jdbcType="VARCHAR" property="lastDate" />
+	</resultMap>
+
+	<insert id="addZoneInfo" parameterType="com.allcam.modules.zone.model.ZoneInfo">
+		insert into
+		tbl_zone_info(ZONEID,ZONENAME,PARENTID,STATUS,ZONECODE,ZONEINFO,REMARK,CREATEDATE,LASTDATE)
+		values(#{zoneId},#{zoneName},#{parentId},#{status},#{zoneCode},#{zoneInfo},#{remark},#{createDate},#{lastDate})
+	</insert>
+	<update id="delZoneInfo" parameterType="com.allcam.modules.zone.model.ZoneInfo">
+		update tbl_zone_info set
+		status='3'
+		where ZONEID=#{zoneId}
+	</update>
+	<update id="modZoneInfo" parameterType="com.allcam.modules.zone.model.ZoneInfo">
+		update tbl_zone_info set LASTDATE='${lastDate}'
+		<if test="zoneName!=null and !&quot;&quot;.equals(zoneName.trim())">
+			,ZONENAME=#{zoneName}
+		</if>
+		<if test="zoneCode!=null and !&quot;&quot;.equals(zoneCode.trim())">
+			,ZONECODE=#{zoneCode}
+		</if>
+		<if test="parentId!=null and !&quot;&quot;.equals(parentId.trim())">
+			,PARENTID=#{parentId}
+		</if>
+		<if test="status!=null">
+			,STATUS=#{status}
+		</if>
+		<if test="remark!=null and !&quot;&quot;.equals(remark.trim())">
+			,REMARK=#{remark}
+		</if>
+		where ZONEID=#{zoneId}
+	</update>
+	<select id="queryZoneInfoListByPage" parameterType="map"
+		resultMap="ZoneInfoResult">
+		select * from tbl_zone_info where status!='3'
+		<if
+			test="zoneInfo.zoneName!=null and !&quot;&quot;.equals(zoneInfo.zoneName.trim())">
+			and ZONENAME like '%#{zoneInfo.zoneName}%'
+		</if>
+	</select>
+	<select id="getZoneInfo" parameterType="map" resultMap="ZoneInfoResult">
+		select *
+		from tbl_zone_info where status!='3' AND ZONEID=#{zoneId}
+	</select>
+
+</mapper>

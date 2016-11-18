@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdminInfo">
+	<resultMap type="com.allcam.modules.admin.model.AdminInfo" id="AdminInfoResult">
+	<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="adminid" jdbcType="VARCHAR" property="adminId" />
+		<result column="username" jdbcType="VARCHAR" property="username" />
+		<result column="password" jdbcType="VARCHAR" property="password" />
+		<result column="admindesc" jdbcType="VARCHAR" property="adminDesc" />
+	</resultMap>
+	
+	<select id="queryAdminInfo" parameterType="com.allcam.modules.admin.model.AdminInfo"
+		resultType="com.allcam.modules.admin.model.AdminInfo">
+		SELECT id,adminid,username,password,admindesc FROM tbl_sys_admin WHERE 1=1
+		<if test="username!=null and !&quot;&quot;.equals(username.trim())">
+			AND username=BINARY #{username}
+		</if>
+		<if test="password!=null and !&quot;&quot;.equals(password.trim())">
+			AND password=BINARY #{password}
+		</if>
+	</select>
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AdsInfo">
+
+	<resultMap type="com.allcam.pojo.AdsInfo" id="AdsInfoResult">
+		<result column="Id" jdbcType="VARCHAR" property="id" />
+		<result column="adsId" jdbcType="VARCHAR" property="adsId" />
+		<result column="adsName" jdbcType="VARCHAR" property="adsName" />
+		<result column="adsType" jdbcType="VARCHAR" property="adsType" />
+		<result column="adsDesc" jdbcType="VARCHAR" property="adsDesc" />
+		<result column="adsContent" jdbcType="VARCHAR" property="adsContent" />
+		<result column="adsServerUrl" jdbcType="VARCHAR" property="adsServerUrl" />
+		<result column="createDate" jdbcType="VARCHAR" property="createDate" />
+		<result column="lastDate" jdbcType="VARCHAR" property="lastDate" />
+	</resultMap>
+
+	<select id="queryAdsInfo" parameterType="com.allcam.pojo.AdsInfo"
+		resultType="com.allcam.pojo.AdsInfo">
+		SELECT * FROM tbl_ads_info ads,tbl_ads_school_device_map map WHERE
+		ads.adsId=map.adsId
+		<if
+			test="deviceAdsReq.deviceId!=null and !&quot;&quot;.equals(deviceAdsReq.deviceId.trim())">
+			AND deviceId=#{deviceAdsReq.deviceId}
+		</if>
+		<if test="nurId!=null and !&quot;&quot;.equals(nurId.trim())">
+			AND nurId=#{deviceAdsReq.schoolId}
+		</if>
+	</select>
+
+	<insert id="addAdsInfo" parameterType="com.allcam.pojo.AdsInfo">
+		insert
+		tbl_task_info(taskId,taskName,taskValue,taskType,taskData,taskServerUrl,createDate)
+		values(#{taskId},#{taskName},#{taskValue},#{taskType},#{taskData},#{taskServerUrl},#{createDate})
+	</insert>
+
+	<update id="modAdsInfo" parameterType="com.allcam.pojo.AdsInfo">
+		update
+		tbl_Task_info
+		set
+		taskName=#{taskName},taskValue=#{taskValue},taskType=#{taskType},taskData=#{taskData},taskServerUrl=#{taskServerUrl},lastDate=#{lastDate}
+		where
+		taskId=#{taskId}
+	</update>
+
+	<delete id="delAdsInfo" parameterType="com.allcam.pojo.AdsInfo">
+		delete from
+		tbl_ads_info
+		where
+		taskId=#{taskId}
+	</delete>
+</mapper>

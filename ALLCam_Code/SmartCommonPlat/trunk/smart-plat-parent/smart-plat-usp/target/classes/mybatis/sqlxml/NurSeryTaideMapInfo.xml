@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="NurSeryTaideMapInfo">
+
+	<resultMap type="com.allcam.pojo.NurSeryTaideMapInfo" id="SchoolInfoResult">
+		<result column="NURID" jdbcType="VARCHAR" property="nurId" />
+		<result column="NURNAME" jdbcType="VARCHAR" property="nurName" />
+		<result column="logoUrl" jdbcType="VARCHAR" property="logoUrl" />
+		<result column="startUrl" jdbcType="VARCHAR" property="startUrl" />
+		<result column="shopUrl" jdbcType="VARCHAR" property="shopUrl" />
+		<result column="anonymousName" jdbcType="VARCHAR" property="anonymousName" />
+		<result column="sort" jdbcType="VARCHAR" property="sort" />
+		<result column="bpcServerUrl" jdbcType="VARCHAR" property="bpcServerUrl" />
+		<result column="deptID" jdbcType="VARCHAR" property="deptID" />
+		<result column="deptName" jdbcType="VARCHAR" property="deptName" />
+		<result column="fullDeptName" jdbcType="VARCHAR" property="fullDeptName" />
+		<result column="pDept" jdbcType="VARCHAR" property="pDept" />
+		<result column="StartIndex" jdbcType="INTEGER" property="startIndex" />
+	</resultMap>
+	<select id="querySchoolInfoList" parameterType="com.allcam.pojo.NurSeryTaideMapInfo"
+		resultMap="SchoolInfoResult">
+		select
+		n.NURID,n.NURNAME,n.logoUrl,n.startUrl,n.shopUrl,n.anonymousName,n.sort,n.bpcServerUrl,map.deptID,map.deptName,map.fullDeptName,map.pDept,map.StartIndex
+		from tbl_nursery_info n,tbl_nursery_taide_map map
+		<where>
+			n.nurid=map.nurid and n.NURID!='00000000000000000000000000000000'
+			<if test="deptID != null and !&quot;&quot;.equals(deptID.trim())">
+				and deptID=#{deptID}
+			</if>
+			<if test="nurId != null and !&quot;&quot;.equals(nurId.trim())">
+				and nurId=#{nurId}
+			</if>
+			<if test="nurName != null and !&quot;&quot;.equals(nurName.trim())">
+				and NURNAME like '%' #{nurName} '%' </if>
+		</where>
+		order by sort
+	</select>
+
+	<update id="modNurSeryTaideMap" parameterType="com.allcam.pojo.NurSeryTaideMapInfo">
+		update tbl_nursery_taide_map set StartIndex=#{startIndex}
+	</update>
+
+</mapper>

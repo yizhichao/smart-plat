@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="DeviceInfo">
+	<resultMap type="com.allcam.modules.device.model.DeviceInfo"
+		id="ZoneInfoResult">
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ZONEID" jdbcType="VARCHAR" property="zoneId" />
+		<result column="CLIENTID" jdbcType="VARCHAR" property="clientId" />
+		<result column="DEVSN" jdbcType="VARCHAR" property="devSn" />
+		<result column="DEVID" jdbcType="VARCHAR" property="devId" />
+		<result column="DEVNAME" jdbcType="VARCHAR" property="devName" />
+		<result column="DEVTYPE" jdbcType="VARCHAR" property="devType" />
+		<result column="LOGINNAME" jdbcType="VARCHAR" property="loginName" />
+		<result column="PASSWD" jdbcType="VARCHAR" property="password" />
+		<result column="DEVICEMODELID" jdbcType="VARCHAR" property="storageVolume" />
+		<result column="DEVACCESSMODE" jdbcType="VARCHAR" property="accessMode" />
+		<result column="ACCESSMODE" jdbcType="VARCHAR" property="devAccessMode" />
+		<result column="SIMNUM" jdbcType="VARCHAR" property="simNum" />
+		<result column="WIRELESSMODE" jdbcType="VARCHAR" property="wireLessModel" />
+		<result column="STATICIP" jdbcType="VARCHAR" property="staticIp" />
+		<result column="NetMask" jdbcType="VARCHAR" property="netMask" />
+		<result column="GateWay" jdbcType="VARCHAR" property="gateWay" />
+		<result column="DNS" jdbcType="VARCHAR" property="dns" />
+		<result column="INSTALLLOCATE" jdbcType="VARCHAR" property="installocate" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="CREATETIME" jdbcType="VARCHAR" property="createTime" />
+		<result column="UPDATETIME" jdbcType="VARCHAR" property="updateTime" />
+	</resultMap>
+
+	<sql id="deviceInfoColumns">
+		a.ID AS "id",
+		a.ZONEID AS "zoneId",
+		a.CLIENTID AS "clientId",
+		a.DEVSN AS "devSn",
+		a.DEVID AS "devId",
+		a.DEVNAME AS "devName",
+		a.DEVTYPE AS "devType",
+		a.LOGINNAME AS "loginName",
+		a.PASSWD AS "password",
+		a.DEVICEMODELID AS "storageVolume",
+		a.DEVACCESSMODE AS "accessMode",
+		a.ACCESSMODE AS "devAccessMode",
+		a.SIMNUM AS "simNum",
+		a.WIRELESSMODE AS "wireLessModel",
+		a.STATICIP AS "staticIp",
+		a.NetMask AS "netMask",
+		a.GateWay AS "gateWay",
+		a.DNS AS "dns", 
+		a.INSTALLLOCATE AS "installocate",
+		a.STATUS AS "status",
+		a.CREATETIME AS "createTime",
+		a.UPDATETIME AS "updateTime"
+	</sql>
+	<sql id="deviceInfoJoins">
+		<!-- LEFT JOIN sys_user_role ur ON ur.user_id = a.id LEFT JOIN sys_role 
+			r ON r.id = ur.role_id -->
+	</sql>
+	<!-- 根据编号获得用户 -->
+	<select id="get" resultType="com.allcam.modules.device.model.DeviceInfo" parameterType="INTEGER">
+		SELECT
+		<include refid="deviceInfoColumns" />
+		<!-- , ro.office_id AS "roleList.officeList.id" -->
+		FROM tbl_dev_info a
+		<include refid="deviceInfoJoins" />
+		WHERE a.id = #{id}
+	</select>
+	
+	<!-- 根据编号获得用户 -->
+	<select id="findList" resultType="com.allcam.modules.device.model.DeviceInfo" parameterType="com.allcam.modules.device.model.DeviceInfo">
+		SELECT
+		<include refid="deviceInfoColumns" />
+		<!-- , ro.office_id AS "roleList.officeList.id" -->
+		FROM tbl_dev_info a
+		<include refid="deviceInfoJoins" />
+		WHERE a.id = #{id}
+	</select>
+	
+	<select id="insert"  parameterType="com.allcam.modules.device.model.DeviceInfo">
+		INSERT INTO 
+		tbl_dev_info (ZONEID, CLIENTID, DEVSN, DEVID
+			, DEVNAME, DEVTYPE, LOGINNAME, PASSWD, DEVICEMODELID
+			, DEVACCESSMODE, ACCESSMODE, SIMNUM, WIRELESSMODE, STATICIP
+			, NetMask, GateWay, DNS, INSTALLLOCATE, STATUS
+			, CREATETIME, UPDATETIME)
+			VALUES 
+			 (#{zoneId}, #{clientId}, #{devSn}, #{devId}
+			, #{devName}, #{devType}, #{loginName}, #{passwd}, #{deviceModelId}
+			, #{devAccessMode}, #{accessMode}, #{simNum}, #{wireLessMode}, #{staticIp}
+			, #{netMask}, #{gateWay}, #{dns}, #{installLocate}, #{status}
+			, now(), now())
+	</select>
+
+</mapper>

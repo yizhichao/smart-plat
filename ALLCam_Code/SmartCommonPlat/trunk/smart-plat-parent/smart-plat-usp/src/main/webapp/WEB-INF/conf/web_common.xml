@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<httpSever>
+		<UserName>bdgw</UserName>
+		<PassWord>bdgw_2015</PassWord>
+		<localIP>114.215.100.148</localIP>
+		<localPort>8085</localPort>
+		<encryptKey>FidmpiZWN6azM3ZDI2eXRdesdwe6a3Rr</encryptKey>
+	</httpSever>
+	<common>
+		<SMSGW>http://114.215.100.148:8082/SMSGW/SMSServer</SMSGW>
+		<smsMsg>
+			<!-- <sn>U0RLLUNLUy0wMTAtMDAzMzA=</sn>
+			<pwd>MDMwMDMx</pwd> -->
+			<sn>U0RLLUNLUy0wMTAtMDAxMzA=</sn>
+			<pwd>NjcxOTMy</pwd>
+		</smsMsg>
+		<OSS>
+			<OSS_ENDPOINT_PUBLIC>http://oss-cn-hangzhou.aliyuncs.com/
+			</OSS_ENDPOINT_PUBLIC>
+			<OSS_ENDPOINT>http://oss-cn-hangzhou-internal.aliyuncs.com/
+			</OSS_ENDPOINT>
+			<ACCESS_ID>h8K5js7NEqfvdzWX</ACCESS_ID>
+			<ACCESS_KEY>ySsSEU6YR9HyBRiNJItWVTbR1ZUxub</ACCESS_KEY>
+			<BUCKET>
+				<NAME>rainbowbridge</NAME>
+			</BUCKET>
+		</OSS>
+		<TASK>
+			<SYNC_STUDENT>http://114.215.100.148:8085/BDGW/SYNC_STUDENT
+			</SYNC_STUDENT>
+			<SYNC_TEACHER>http://114.215.100.148:8085/BDGW/SYNC_TEACHER
+			</SYNC_TEACHER>
+			<SYNC_ADS>http://114.215.100.148:8085/BDGW/SYNC_ADS</SYNC_ADS>
+			<SYS_UPGRADE>http://rainbowbridge.oss-cn-hangzhou.aliyuncs.com/AttendGuard.apk
+			</SYS_UPGRADE>
+		</TASK>
+	</common>
+	<allowRefuseIpConf>
+		<!-- support type 1: not support blackNameAndwhiteName 2: support whiteName 
+			3:support blackName -->
+		<supportType>1</supportType>
+		<!-- whiteName ip(whiteName),support many example : 192.168.*.*,192.*.3.* -->
+		<supportIP>10.139.164.*,10.139.*.*</supportIP>
+		<!-- refuse ip(blackName),support many example : 192.168.*.*,192.*.3.* -->
+		<refuseIP>10.139.56.*,10.152.*.*</refuseIP>
+	</allowRefuseIpConf>
+</config>
