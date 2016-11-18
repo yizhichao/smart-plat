@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MenuInfo">
+	<resultMap type="com.allcam.modules.menu.model.MenuInfo"
+		id="MenuInfoResult">
+		<result column="MENU_ID" jdbcType="VARCHAR" property="menuId" />
+		<result column="MENU_NAME" jdbcType="VARCHAR" property="menuName" />
+		<result column="PARENT_MENU_ID" jdbcType="VARCHAR" property="parentMenuId" />
+		<result column="MENU_ICON" jdbcType="VARCHAR" property="menuIcon" />
+		<result column="MENU_TARGET" jdbcType="VARCHAR" property="menuTarget" />
+		<result column="SORT" jdbcType="INTEGER" property="sort" />
+		<result column="CHECKED" jdbcType="INTEGER" property="checked" />
+		<result column="IS_SHOW" jdbcType="VARCHAR" property="isShow" />
+	</resultMap>
+
+
+	<select id="queryAllMenuInfo" resultMap="MenuInfoResult">
+		SELECT * FROM
+		tbl_menu_info WHERE IS_SHOW='1' order
+		by sort asc
+	</select>
+
+	<select id="queryUserMenu" resultMap="MenuInfoResult"
+		parameterType="Map">
+		SELECT t1.* FROM tbl_menu_info t1 WHERE t1.IS_SHOW='1' and t1.MENU_ID in (select r1.MENU_ID from tbl_role_menu r1 where
+		r1.ROLE_ID=#{userType})
+		order by t1.SORT asc
+	</select>
+</mapper>

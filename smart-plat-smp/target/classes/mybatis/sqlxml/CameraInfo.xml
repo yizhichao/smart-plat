@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CameraInfo">
+	<resultMap type="com.allcam.modules.camera.model.CameraInfo"
+		id="CameraInfoResult">
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ZONEID" jdbcType="VARCHAR" property="zoneId" />
+		<result column="CLIENTID" jdbcType="VARCHAR" property="clientId" />
+		<result column="DEVID" jdbcType="VARCHAR" property="devId" />
+		<result column="CAMERAID" jdbcType="VARCHAR" property="cameraId" />
+		<result column="CAMERANAME" jdbcType="VARCHAR" property="cameraName" />
+		<result column="CAMERATYPE" jdbcType="VARCHAR" property="cameraType" />
+		<result column="CAMERAMODEL" jdbcType="VARCHAR" property="cameraModel" />
+		<result column="VENDORID" jdbcType="VARCHAR" property="vendorId" />
+		<result column="LOCTIONDESC" jdbcType="VARCHAR" property="locationDesc" />
+		<result column="LOCGPS" jdbcType="VARCHAR" property="locGps" />
+		<result column="STOREAGEVOLUME" jdbcType="VARCHAR" property="storeageVolume" />
+		<result column="DATAFORMAT" jdbcType="VARCHAR" property="dataFormat" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="CREATETIME" jdbcType="VARCHAR" property="createTime" />
+		<result column="UPDATETIME" jdbcType="VARCHAR" property="updateTime" />
+		<!-- <result column="ISSHARED" jdbcType="VARCHAR" property="isShared" /> 
+			<result column="SHARERIGHT" jdbcType="VARCHAR" property="shareRight" /> <result 
+			column="PTZAUTH" jdbcType="VARCHAR" property="ptzAuth" /> -->
+	</resultMap>
+
+	<sql id="cameraInfoColumns">
+		a.ID AS "id",
+		a.ZONEID AS "zoneId",
+		a.CLIENTID AS "clientId",
+		a.DEVID AS "devId",
+		a.CAMERAID AS "cameraId",
+		a.CAMERANAME AS "cameraName",
+		a.CAMERATYPE AS
+		"cameraType",
+		a.CAMERAMODEL AS "cameraModel",
+		a.VENDORID AS "vendorId",
+		a.LOCTIONDESC AS "locationDesc",
+		a.LOCGPS AS "locGps",
+		a.STOREAGEVOLUME
+		AS "storageVolume",
+		a.DATAFORMAT AS "dataFormat",
+		a.REMARK AS "remark",
+		a.STATUS AS "status",
+		a.CREATETIME AS "createTime",
+		a.UPDATETIME AS
+		"updateTime"
+	</sql>
+	<sql id="cameraInfoJoins">
+		<!-- LEFT JOIN sys_user_role ur ON ur.user_id = a.id LEFT JOIN sys_role 
+			r ON r.id = ur.role_id -->
+	</sql>
+	<!-- 根据编号获得用户 -->
+	<select id="get" resultType="com.allcam.modules.camera.model.CameraInfo"
+		parameterType="INTEGER">
+		SELECT
+		<include refid="cameraInfoColumns" />
+		<!-- , ro.office_id AS "roleList.officeList.id" -->
+		FROM tbl_dev_info a
+		<include refid="cameraInfoJoins" />
+		WHERE a.id = #{id}
+	</select>
+
+
+	<select id="insert" parameterType="com.allcam.modules.camera.model.CameraInfo">
+		INSERT INTO
+		tbl_camera_info (ZONEID, CLIENTID,DEVID
+		, CAMERAID, CAMERANAME, CAMERATYPE, CAMERAMODEL, VENDORID
+		, LOCTIONDESC, LOCGPS, STOREAGEVOLUME, DATAFORMAT,REMARK, STATUS
+		, CREATETIME, UPDATETIME)
+		VALUES
+		(#{zoneId}, #{clientId}, #{devId}
+		, #{cameraId}, #{cameraName}, #{cameraType}, #{cameraModel},
+		#{vendorId}
+		, #{locationDesc}, #{locGps}, #{storeageVolume}, #{dataFormat},
+		#{remark}
+		, #{status} , now(), now())
+
+	</select>
+
+	<insert id="insertList" parameterType="java.util.List">
+		INSERT INTO
+		tbl_camera_info (ZONEID,DEVID
+		, CAMERAID, CAMERANAME, CAMERATYPE,STATUS
+		, CREATETIME, UPDATETIME)
+		VALUES
+		 <foreach collection="list" item="item" index="index"  separator="UNION ALL" > 
+		(#{item.zoneId, jdbcType=VARCHAR}, #{item.devId, jdbcType=VARCHAR}
+		, #{item.cameraId, jdbcType=VARCHAR}, #{item.cameraName, jdbcType=VARCHAR}
+		, #{item.cameraType, jdbcType=VARCHAR}
+		, #{item.status, jdbcType=INTEGER} , now(), now())
+		</foreach>
+	</insert>
+
+</mapper>

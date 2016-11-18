@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="beiyangDynamicJob" class="com.allcam.timerjob.QueryBeiyangPersonRecordJob"></bean>
+	<bean id="taideDynamicJob" class="com.allcam.timerjob.QueryTaidePersonRecordJob"></bean>
+	<bean id="failResendJob" class="com.allcam.timerjob.PersonRecordFailResendJob"></bean>
+	<bean id="syncDataJob" class="com.allcam.timerjob.SyncDataJob"></bean>
+
+
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="beiyangJobtask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="beiyangDynamicJob" />
+		</property>
+		<!-- 调用类中的方法 ,如果有方法重载则会执行无参数的方法 -->
+		<property name="targetMethod">
+			<value>queryBeiyangPersonRecord</value>
+		</property>
+		<!--false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<!-- cron触发器bean,设置石英任务的调度策略 -->
+	<bean id="beiyangCronTriggerBean"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="beiyangJobtask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>0/10 * * * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="taideJobtask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="taideDynamicJob" />
+		</property>
+		<!-- 调用类中的方法 ,如果有方法重载则会执行无参数的方法 -->
+		<property name="targetMethod">
+			<value>queryTaidePersonRecord</value>
+		</property>
+		<!--false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<!-- cron触发器bean,设置石英任务的调度策略 -->
+	<bean id="taideCronTriggerBean"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="taideJobtask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>0/10 * * * * ?</value>
+		</property>
+	</bean>
+
+
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="failresendJobtask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="failResendJob" />
+		</property>
+		<!-- 调用类中的方法 ,如果有方法重载则会执行无参数的方法 -->
+		<property name="targetMethod">
+			<value>personRecordFailResend</value>
+		</property>
+		<!--false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="syncDataJobtask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="syncDataJob" />
+		</property>
+		<!-- 调用类中的方法 ,如果有方法重载则会执行无参数的方法 -->
+		<property name="targetMethod">
+			<value>syncDataJob</value>
+		</property>
+		<!--false表示等上一个任务执行完后再开启新的任务 -->
+		<property name="concurrent" value="false" />
+	</bean>
+
+	<!-- cron触发器bean,设置石英任务的调度策略 -->
+	<bean id="failresendCronTriggerBean"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="failresendJobtask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>0/10 * * * * ?</value>
+		</property>
+	</bean>
+	
+	<!-- cron触发器bean,设置石英任务的调度策略 -->
+	<bean id="syncDataCronTriggerBean"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="syncDataJobtask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>0 0 1 * * ?</value>
+		</property>
+	</bean>
+
+	<!-- 调度工厂bean,激活触发器运行,如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+		lazy-init="false" autowire="no">
+		<property name="triggers">
+			<list>
+				<!--<ref bean="beiyangCronTriggerBean" /> -->
+				<!-- <ref bean="taideCronTriggerBean" /> -->
+				<!-- <ref bean="failresendCronTriggerBean" /> -->
+			</list>
+		</property>
+		<!-- 配置自动执行 -->
+        <property name="autoStartup" value="true" />
+	</bean>
+</beans>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="GroupInfo">
+	<resultMap type="com.allcam.modules.group.model.GroupInfo"
+		id="GroupInfoResult">
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="GROUPID" jdbcType="VARCHAR" property="groupId" />
+		<result column="DEVID" jdbcType="VARCHAR" property="devId" />
+		<result column="PARENTID" jdbcType="VARCHAR" property="parentId" />
+		<result column="GROUPNAME" jdbcType="VARCHAR" property="groupName" />
+		<result column="GROUPTYPE" jdbcType="VARCHAR" property="groupType" />
+		<result column="GROUPDESC" jdbcType="VARCHAR" property="groupDesc" />
+		<result column="CLIENTID" jdbcType="VARCHAR" property="clientId" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="ISSHARED" jdbcType="VARCHAR" property="isShared" />
+		<result column="CREATETIME" jdbcType="VARCHAR" property="createTime" />
+		<result column="UPDATETIME" jdbcType="VARCHAR" property="updateTime" />
+	</resultMap>
+
+	<sql id="GroupInfoColumns">
+		a.ID AS "id",
+		a.GROUPID AS "groupId",
+		a.PARENTID AS "parentId",
+		a.GROUPNAME AS "groupName",
+		a.GROUPTYPE AS "groupType",
+		a.GROUPDESC AS "groupDesc",
+		a.CLIENTID AS "clientId",
+		a.STATUS AS "status",
+		a.CREATETIME AS "createTime",
+		a.UPDATETIME AS "updateTime",
+		a.DEVID AS "devId",
+		a.ISSHARED AS "isShared"
+	</sql>
+	
+	
+	<select id="insert"  parameterType="com.allcam.modules.group.model.GroupInfo">
+		INSERT INTO 
+		tbl_group_info (GROUPID, PARENTID, GROUPNAME, GROUPTYPE
+			, GROUPDESC, CLIENTID, STATUS, CREATETIME, UPDATETIME)
+			VALUES 
+			 (#{groupId}, #{parentId}, #{groupName}, #{groupType}
+			, #{groupDesc}, #{clientId}, #{status}
+			, now(), now())
+		
+	</select>
+
+	<insert id="insertMap" parameterType="map">
+		INSERT INTO 
+		tbl_dev_group_map (DEVID, GROUPID, CLIENTID, ISSHARED,CREATETIME,UPDATETIME)
+			VALUES 
+			 (#{devId},#{groupId}, #{clientId},#{isShared}, now(), now())
+	</insert>
+
+	
+	
+	
+	<update id="delGroup" parameterType="java.util.List">
+		update tbl_group_info set
+		status='0' where GROUPID in
+		<foreach item="item" collection="list" open="(" separator="," close=")">
+		#{item, jdbcType=VARCHAR}
+		</foreach>
+	</update>
+</mapper>

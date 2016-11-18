@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ClientInfo">
+	<resultMap type="com.allcam.modules.client.model.ClientInfo"
+		id="clientInfoResult">
+		<result column="ID" jdbcType="INTEGER" property="id" />
+		<result column="ZONEID" jdbcType="VARCHAR" property="zoneId" />
+		<result column="ZONENAME" jdbcType="VARCHAR" property="zoneName" />
+		<result column="CLIENTID" jdbcType="VARCHAR" property="clientId" />
+		<result column="CLIENTNAME" jdbcType="VARCHAR" property="clientName" />
+		<result column="CLIENTTYPE" jdbcType="VARCHAR" property="clientType" />
+		<result column="POSTCODE" jdbcType="VARCHAR" property="postCode" />
+		<result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+		<result column="EMAIL" jdbcType="VARCHAR" property="email" />
+		<result column="PASSWORD" jdbcType="VARCHAR" property="passWord" />
+		<result column="PHONE" jdbcType="VARCHAR" property="phone" />
+		<result column="FAX" jdbcType="VARCHAR" property="fax" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="CREATEDATE" jdbcType="VARCHAR" property="createDate" />
+		<result column="LASTDATE" jdbcType="VARCHAR" property="lastDate" />
+	</resultMap>
+
+	<insert id="addClientInfo" parameterType="com.allcam.modules.client.model.ClientInfo">
+		insert into
+		tbl_client_info(ZONEID,CLIENTID,CLIENTNAME,CLIENTTYPE,POSTCODE,ADDRESS,EMAIL,PASSWORD,PHONE,FAX,STATUS,REMARK,CREATEDATE,LASTDATE)
+		values(#{zoneId},#{clientId},#{clientName},#{clientType},#{postCode},#{address},#{email},#{passWord},#{phone},#{fax},#{status},#{remark},#{createDate},#{lastDate})
+	</insert>
+	<update id="delClientInfo" parameterType="com.allcam.modules.client.model.ClientInfo">
+		update tbl_client_info
+		set
+		status='3'
+		where CLIENTID=#{clientId}
+	</update>
+	<update id="modClientInfo" parameterType="com.allcam.modules.client.model.ClientInfo">
+		update tbl_client_info set LASTDATE='${lastDate}'
+		<if test="clientName!=null and !&quot;&quot;.equals(clientName.trim())">
+			,CLIENTNAME=#{clientName}
+		</if>
+		<if test="clientType!=null and !&quot;&quot;.equals(clientType.trim())">
+			,CLIENTTYPE=#{clientType}
+		</if>
+		<if test="postCode!=null and !&quot;&quot;.equals(postCode.trim())">
+			,POSTCODE=#{postCode}
+		</if>
+		<if test="address!=null and !&quot;&quot;.equals(address.trim())">
+			,ADDRESS=#{address}
+		</if>
+		<if test="email!=null and !&quot;&quot;.equals(email.trim())">
+			,EMAIL=#{email}
+		</if>
+		<if test="passWord!=null and !&quot;&quot;.equals(passWord.trim())">
+			,PASSWORD=#{passWord}
+		</if>
+		<if test="phone!=null and !&quot;&quot;.equals(phone.trim())">
+			,PHONE=#{phone}
+		</if>
+		<if test="fax!=null and !&quot;&quot;.equals(fax.trim())">
+			,FAX=#{fax}
+		</if>
+		<if test="status!=null">
+			,STATUS=#{status}
+		</if>
+		<if test="remark!=null and !&quot;&quot;.equals(remark.trim())">
+			,REMARK=#{remark}
+		</if>
+		where clientID=#{clientId}
+	</update>
+	<select id="queryClientInfoListByPage" parameterType="map"
+		resultMap="clientInfoResult">
+		select * from tbl_client_info where status!='3'
+		<if
+			test="clientInfo.clientName!=null and !&quot;&quot;.equals(clientInfo.clientName.trim())">
+			and clientNAME like '%#{clientInfo.clientName}%'
+		</if>
+	</select>
+	<select id="getClientInfo" parameterType="map" resultMap="clientInfoResult">
+		select
+		*
+		from tbl_client_info where status!='3' AND clientID=#{clientId}
+	</select>
+
+
+	<select id="queryClientInfoList" parameterType="map"
+		resultType="com.allcam.modules.client.model.ClientInfo">
+		select z.ZONENAME,p.* from tbl_zone_info z,tbl_client_info p where
+		z.zoneId=p.zoneId
+		<if test="aoData!=null">
+			<if
+				test="aoData.sZoneId!=null and !&quot;&quot;.equals(aoData.sZoneId.trim())">
+				AND p.zoneId=#{aoData.sZoneId}
+			</if>
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (
+				p.clientName like
+				"%"#{aoData.sSearch}"%" OR p.ADDRESS
+				like
+				"%"#{aoData.sSearch}"%")
+			</if>
+		</if>
+		<if
+			test="aoData.sSortCol_!=null and !&quot;&quot;.equals(aoData.sSortCol_.trim())">
+			ORDER BY ${aoData.sSortCol_} ${aoData.sSortDir_}
+		</if>
+		LIMIT #{aoData.iDisplayStart},#{aoData.iDisplayLength}
+	</select>
+
+	<select id="queryClientInfoTotal" parameterType="map"
+		resultType="Integer">
+	SELECT COUNT(1) FROM
+	(
+	select z.ZONENAME,p.* from tbl_zone_info
+	z,tbl_client_info p where
+	z.zoneId=p.zoneId
+		<if test="aoData!=null">
+			<if
+				test="aoData.sZoneId!=null and !&quot;&quot;.equals(aoData.sZoneId.trim())">
+				AND p.zoneId=#{aoData.sZoneId}
+			</if>
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (
+				p.clientName like
+				"%"#{aoData.sSearch}"%" OR p.ADDRESS
+				like
+				"%"#{aoData.sSearch}"%")
+			</if>
+		</if>
+		<if
+			test="aoData.sSortCol_!=null and !&quot;&quot;.equals(aoData.sSortCol_.trim())">
+			ORDER BY ${aoData.sSortCol_} ${aoData.sSortDir_}
+		</if>
+		) a
+	</select>
+</mapper>

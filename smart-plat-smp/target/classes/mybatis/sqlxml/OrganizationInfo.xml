@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrganizationInfo">
+	<resultMap type="com.allcam.pojo.OrganizationInfo" id="OrganizationInfoResult">
+		<result column="ORGANIZATION_ID" jdbcType="VARCHAR" property="organizationId" />
+		<result column="ORGANIZATION_NAME" jdbcType="VARCHAR" property="organizationName" />
+		<result column="PARENT_ORGANIZATION_ID" jdbcType="VARCHAR"
+			property="parentOrganizationId" />
+		<result column="SCHOOL_ID" jdbcType="VARCHAR" property="schoolId" />
+		<result column="SORT" jdbcType="INTEGER" property="sort" />
+		<result column="CREATE_TIME" jdbcType="VARCHAR" property="createTime" />
+		<result column="UPDATE_TIME" jdbcType="VARCHAR" property="updateTime" />
+		<result column="CREATE_BY" jdbcType="VARCHAR" property="createBy" />
+		<result column="UPDATE_BY" jdbcType="VARCHAR" property="updateBy" />
+	</resultMap>
+
+	<insert id="addOrganizationInfo" parameterType="com.allcam.pojo.OrganizationInfo">
+		insert into
+		tbl_organization_info(ORGANIZATION_ID,ORGANIZATION_NAME,PARENT_ORGANIZATION_ID,SCHOOL_ID,SORT,CREATE_TIME,UPDATE_TIME,CREATE_BY,UPDATE_BY)
+		values(#{organizationId},#{organizationName},#{parentOrganizationId},#{schoolId},#{sort},#{createTime},#{updateTime},#{createBy},#{updateBy})
+	</insert>
+	<delete id="deleteOrganizationInfo" parameterType="com.allcam.pojo.OrganizationInfo">
+		delete from tbl_organization_info where
+		ORGANIZATION_ID=#{organizationId}
+	</delete>
+	<update id="updateOrganizationInfo" parameterType="com.allcam.pojo.OrganizationInfo">
+		update tbl_organization_info set ORGANIZATION_ID=#{organizationId}
+		<if
+			test="organizationName!=null and !&quot;&quot;.equals(organizationName.trim())">
+			,ORGANIZATION_NAME=#{organizationName}
+		</if>
+		<if
+			test="parentOrganizationId!=null and !&quot;&quot;.equals(parentOrganizationId.trim())">
+			,PARENT_ORGANIZATION_ID=#{parentOrganizationId}
+		</if>
+		<if test="updateTime!=null and !&quot;&quot;.equals(updateTime.trim())">
+			,UPDATE_TIME=#{updateTime}
+		</if>
+		<if test="updateBy!=null and !&quot;&quot;.equals(updateBy.trim())">
+			,UPDATE_BY=#{updateBy}
+		</if>
+		<if test="sort!=null and !&quot;&quot;.equals(sort.trim())">
+			,SORT=#{sort}
+		</if>
+		where ORGANIZATION_ID=#{organizationId}
+	</update>
+
+	<select id="queryOrganizationInfoByCer" parameterType="map"
+		resultMap="OrganizationInfoResult">
+		select
+		t.ORGANIZATION_ID,t.ORGANIZATION_NAME,t.PARENT_ORGANIZATION_ID,t.SCHOOL_ID,t.SORT
+		from tbl_organization_info t where 1=1
+		<if
+			test="organizationInfo.organizationName!=null and !&quot;&quot;.equals(organizationInfo.organizationName.trim())">
+			and ORGANIZATION_NAME=#{organizationInfo.organizationName}
+		</if>
+		<if
+			test="organizationInfo.schoolId!=null and !&quot;&quot;.equals(organizationInfo.schoolId.trim())">
+			and SCHOOL_ID=#{organizationInfo.schoolId}
+		</if>
+		<if
+			test="organizationInfo.organizationId!=null and !&quot;&quot;.equals(organizationInfo.organizationId.trim())">
+			and ORGANIZATION_ID=#{organizationInfo.organizationId}
+		</if>
+		<if
+			test="organizationInfo.parentOrganizationId!=null and !&quot;&quot;.equals(organizationInfo.parentOrganizationId.trim())">
+			and
+			PARENT_ORGANIZATION_ID=#{organizationInfo.parentOrganizationId}
+		</if>
+		order by SORT asc
+	</select>
+
+	<select id="queryOrganizationInfoByPage" parameterType="map"
+		resultMap="OrganizationInfoResult">
+		select
+		t.ORGANIZATION_ID,t.ORGANIZATION_NAME,t.PARENT_ORGANIZATION_ID,t.SCHOOL_ID,t.SORT
+		from tbl_organization_info t where 1=1
+		<if
+			test="organizationInfo.organizationName!=null and !&quot;&quot;.equals(organizationInfo.organizationName.trim())">
+			and ORGANIZATION_NAME=#{organizationInfo.organizationName}
+		</if>
+		<if
+			test="organizationInfo.schoolId!=null and !&quot;&quot;.equals(organizationInfo.schoolId.trim())">
+			and SCHOOL_ID=#{organizationInfo.schoolId}
+		</if>
+		<if
+			test="organizationInfo.organizationId!=null and !&quot;&quot;.equals(organizationInfo.organizationId.trim())">
+			and ORGANIZATION_ID=#{organizationInfo.organizationId}
+		</if>
+		<if
+			test="organizationInfo.parentOrganizationId!=null and !&quot;&quot;.equals(organizationInfo.parentOrganizationId.trim())">
+			and
+			PARENT_ORGANIZATION_ID=#{organizationInfo.parentOrganizationId}
+		</if>
+		order by SORT asc
+	</select>
+	<select id="queryOrganizationInfoByOrganizationId"
+		parameterType="com.allcam.pojo.OrganizationInfo" resultType="com.allcam.pojo.OrganizationInfo">
+		select
+		t.ORGANIZATION_ID as organizationId,t.ORGANIZATION_NAME as
+		organizationName,t.PARENT_ORGANIZATION_ID as
+		parentOrganizationId,t.SCHOOL_ID as schoolId,t.SORT as sort
+		from
+		tbl_organization_info t
+		where t.ORGANIZATION_ID=#{organizationId}
+	</select>
+</mapper>

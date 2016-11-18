@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="CuVersionInfo">
+
+	<resultMap type="com.allcam.pojo.CuVersionInfo" id="CuVersionInfoResult">
+		<result column="Id" jdbcType="VARCHAR" property="id" />
+		<result column="nurId" jdbcType="VARCHAR" property="nurId" />
+		<result column="cutype" jdbcType="VARCHAR" property="cutype" />
+		<result column="versionid" jdbcType="VARCHAR" property="versionid" />
+		<result column="versionMd5" jdbcType="VARCHAR" property="versionMd5" />
+		<result column="versionname" jdbcType="VARCHAR" property="versionname" />
+		<result column="versiondesc" jdbcType="VARCHAR" property="versiondesc" />
+		<result column="versionurl" jdbcType="VARCHAR" property="versionurl" />
+		<result column="compatible" jdbcType="VARCHAR" property="compatible" />
+	</resultMap>
+
+	<select id="queryCuVersionInfo" parameterType="com.allcam.pojo.CuVersionInfo"
+		resultType="com.allcam.pojo.CuVersionInfo">
+		SELECT cuverion.* FROM tbl_cu_version_info
+		cuverion,tbl_task_school_device_map
+		map,tbl_task_info info WHERE
+		cuverion.NURID=map.NURID and
+		map.taskId=info.taskId and
+		info.taskValue='4'
+		<if
+			test="checkSysVersionReq.deviceId!=null and !&quot;&quot;.equals(checkSysVersionReq.deviceId.trim())">
+			AND map.deviceId=#{checkSysVersionReq.deviceId}
+		</if>
+		<if
+			test="checkSysVersionReq.schoolId!=null and !&quot;&quot;.equals(checkSysVersionReq.schoolId.trim())">
+			AND map.nurId=#{checkSysVersionReq.schoolId}
+		</if>
+		<if
+			test="checkSysVersionReq.cuType!=null and !&quot;&quot;.equals(checkSysVersionReq.cuType.trim())">
+			AND cuverion.cuType=#{checkSysVersionReq.cuType}
+		</if>
+	</select>
+
+	<insert id="addCuVersionInfo" parameterType="com.allcam.pojo.CuVersionInfo">
+		insert
+		tbl_task_info(taskId,taskName,taskValue,taskType,taskData,taskServerUrl,createDate)
+		values(#{taskId},#{taskName},#{taskValue},#{taskType},#{taskData},#{taskServerUrl},#{createDate})
+	</insert>
+
+	<update id="modCuVersionInfo" parameterType="com.allcam.pojo.CuVersionInfo">
+		update
+		tbl_Task_info
+		set
+		taskName=#{taskName},taskValue=#{taskValue},taskType=#{taskType},taskData=#{taskData},taskServerUrl=#{taskServerUrl},lastDate=#{lastDate}
+		where
+		taskId=#{taskId}
+	</update>
+
+	<delete id="delCuVersionInfo" parameterType="com.allcam.pojo.CuVersionInfo">
+		delete from
+		tbl_CuVersion_info
+		where
+		taskId=#{taskId}
+	</delete>
+</mapper>

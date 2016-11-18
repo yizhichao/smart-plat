@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<function msgType="GET_SSO_ECSHOP_URL"
+		class="com.online.schedule.service.abilityInf.user.GetSSOEcshopUrlService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetSSOEcshopReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetSSOEcshopResp">
+	</function>
+	<function msgType="GET_SSO_SYS_URL"
+		class="com.online.schedule.service.abilityInf.user.GetSSOSysUrlService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetSSOSysReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetSSOSysResp">
+	</function>
+	<function msgType="CHECK_VERSION_UPGRADE"
+		class="com.online.schedule.service.abilityInf.sysversion.CheckSysVersionService"
+		reqBean="com.online.schedule.service.bean.httpmsg.CheckSysVersionReq"
+		respBean="com.online.schedule.service.bean.httpmsg.CheckSysVersionResp">
+	</function>
+	<function msgType="GET_SERVICE_EXPIRE_INFO"
+		class="com.online.schedule.service.abilityInf.service.GetServiceExpireService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetServiceExpireReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetServiceExpireResp">
+	</function>
+	<function msgType="MOD_PWD"
+		class="com.online.schedule.service.abilityInf.user.ModPwdService"
+		reqBean="com.online.schedule.service.bean.httpmsg.ModPwdReq" respBean="com.online.schedule.service.bean.httpmsg.ModPwdResp">
+	</function>
+	<function msgType="MOD_MOBILE"
+		class="com.online.schedule.service.abilityInf.user.ModMobileService"
+		reqBean="com.online.schedule.service.bean.httpmsg.ModMobileReq"
+		respBean="com.online.schedule.service.bean.httpmsg.ModMobileResp">
+	</function>
+	<function msgType="MOD_NICKNAME"
+		class="com.online.schedule.service.abilityInf.user.ModNickService"
+		reqBean="com.online.schedule.service.bean.httpmsg.ModNickReq"
+		respBean="com.online.schedule.service.bean.httpmsg.ModNickResp">
+	</function>
+	<function msgType="GET_GROUPS_USERS"
+		class="com.online.schedule.service.abilityInf.group.GetGroupUserService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GroupInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GroupUserInfoResp">
+	</function>
+	<function msgType="GET_CONTACT_INFO"
+		class="com.online.schedule.service.abilityInf.user.GetContactListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetContactListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetContactListResp">
+	</function>
+	<function msgType="GET_CLASS_ALBUM"
+		class="com.online.schedule.service.abilityInf.album.ClassAlbumService"
+		reqBean="com.online.schedule.service.bean.httpmsg.ClassAlbumReq"
+		respBean="com.online.schedule.service.bean.httpmsg.ClassAlbumResp">
+	</function>
+	<function msgType="GET_ALBUM_LIST"
+		class="com.online.schedule.service.abilityInf.album.AlbumListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetAlbumListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetAlbumListResp">
+	</function>
+	<function msgType="GET_ALBUM_DETAIL_INFO"
+		class="com.online.schedule.service.abilityInf.album.GetAlbumDetailInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetAlbumDetailInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetAlbumDetailInfoResp">
+	</function>
+	<function msgType="RESTORE_PHOTO"
+		class="com.online.schedule.service.abilityInf.album.RestorePhotoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.RestorePhotoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.RestorePhotoResp">
+	</function>
+	<function msgType="DELETE_PHOTO"
+		class="com.online.schedule.service.abilityInf.album.DeletePhotoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.DeletePhotoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.DeletePhotoResp">
+	</function>
+	<function msgType="GET_FAMILY_MEMBER_LIST"
+		class="com.online.schedule.service.abilityInf.user.GetFamilyMemberListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetFamilyMemberListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetFamilyMemberListResp">
+	</function>
+	<function msgType="GET_UPLOAD_FILE_URL"
+		class="com.online.schedule.service.abilityInf.upload.GetUploadUrlService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetUploadUrlReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetUploadUrlResp">
+	</function>
+	<function msgType="GET_VIDEO_LIST"
+		class="com.online.schedule.service.abilityInf.video.GetVideoResourceService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetVideoResourceReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetVideoResourceResp">
+	</function>
+	<function msgType="GET_DYNAMIC_NOTICE_LIST"
+		class="com.online.schedule.service.abilityInf.dynamiclist.DynamicListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetDynamicNoticeListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetDynamicNoticeListResp">
+	</function>
+	<function msgType="GET_REAL_PLAY_LIST"
+		class="com.online.schedule.service.abilityInf.realplay.RealPlayListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetRealPlayListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetRealPlayListResp">
+	</function>
+	<function msgType="GET_REAL_PLAY_STATUS"
+		class="com.online.schedule.service.abilityInf.realplay.GetRealStatusService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetRealPlayListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetRealPlayListResp">
+	</function>
+	<function msgType="ADD_PLAN_PLAY"
+		class="com.online.schedule.service.abilityInf.planplay.AddPlanPlayService"
+		reqBean="com.online.schedule.service.bean.httpmsg.AddPlanPlayReq"
+		respBean="com.online.schedule.service.bean.httpmsg.AddPlanPlayResp">
+	</function>
+	<function msgType="REAL_PLAY_SET"
+		class="com.online.schedule.service.abilityInf.realplay.SetRealPlayService"
+		reqBean="com.online.schedule.service.bean.httpmsg.SetRealPlayReq"
+		respBean="com.online.schedule.service.bean.httpmsg.SetRealPlayResp">
+	</function>
+	<function msgType="GET_CAM_LIST"
+		class="com.online.schedule.service.abilityInf.dev.GetCamListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetCamListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetCamListResp">
+	</function>
+	<function msgType="POST_DYNAMIC_NOTICE"
+		class="com.online.schedule.service.abilityInf.dynamiclist.PostDynamicNoticeService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostDynamicNoticeReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostDynamicNoticeResp">
+	</function>
+	<function msgType="DELETE_DYNAMIC_NOTICE"
+		class="com.online.schedule.service.abilityInf.dynamiclist.DeleteDynamicNoticeService"
+		reqBean="com.online.schedule.service.bean.httpmsg.DeleteDynamicNoticeReq"
+		respBean="com.online.schedule.service.bean.httpmsg.DeleteDynamicNoticeResp">
+	</function>
+	<function msgType="GET_UPDATE_FUNCTION"
+		class="com.online.schedule.service.abilityInf.function.UpdateFunctionService"
+		reqBean="com.online.schedule.service.bean.httpmsg.UpdateFuctionInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.UpdateFuctionInfoResp">
+	</function>
+	<function msgType="GET_CLASS_DYNAMIC"
+		class="com.online.schedule.service.abilityInf.classDynamic.ClassDynamicInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.ClassDynamicInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.ClassDynamicInfoResp">
+	</function>
+	<function msgType="PUBLISH_CLASS_DYNAMIC"
+		class="com.online.schedule.service.abilityInf.classDynamic.PublishClassDynamicService"
+		reqBean="com.online.schedule.service.bean.httpmsg.ClassDynamicReq"
+		respBean="com.online.schedule.service.bean.httpmsg.ClassDynamicResp">
+	</function>
+	<function msgType="DELETE_CLASS_DYNAMIC"
+		class="com.online.schedule.service.abilityInf.classDynamic.DeleteClassDynamicService"
+		reqBean="com.online.schedule.service.bean.httpmsg.DeleteClassDynamicReq"
+		respBean="com.online.schedule.service.bean.httpmsg.DeleteClassDynamicResp">
+	</function>
+	<function msgType="POST_COMMENT"
+		class="com.online.schedule.service.abilityInf.comment.PostCommentService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostCommentReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostCommentResp">
+	</function>
+	<function msgType="GET_COMMENT_DETAIL"
+		class="com.online.schedule.service.abilityInf.comment.GetCommentDetailService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetCommentDetailReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetCommentDetailResp">
+	</function>
+	<function msgType="DELETE_COMMENT"
+		class="com.online.schedule.service.abilityInf.comment.DeleteCommentService"
+		reqBean="com.online.schedule.service.bean.httpmsg.DeleteCommentReq"
+		respBean="com.online.schedule.service.bean.httpmsg.DeleteCommentResp">
+	</function>
+	<function msgType="POST_PRAISE"
+		class="com.online.schedule.service.abilityInf.praise.PostPraiseService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostPraiseReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostPraiseResp">
+	</function>
+	<function msgType="GET_PRAISE_DETAIL"
+		class="com.online.schedule.service.abilityInf.praise.GetPraiseDetailService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetPraiseDetailReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetPraiseDetailResp">
+	</function>
+	<function msgType="DELETE_PRAISE"
+		class="com.online.schedule.service.abilityInf.praise.DeletePraiseService"
+		reqBean="com.online.schedule.service.bean.httpmsg.DeletePraiseReq"
+		respBean="com.online.schedule.service.bean.httpmsg.DeletePraiseResp">
+	</function>
+	<function msgType="POST_FEEDBACK"
+		class="com.online.schedule.service.abilityInf.feedback.PostFeedbackService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostFeedbackReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostFeedbackResp">
+	</function>
+	<function msgType="FILE_UPLOAD_NOTIFY"
+		class="com.online.schedule.service.abilityInf.upload.FileUploadNotifyService"
+		reqBean="com.online.schedule.service.bean.httpmsg.FileUploadNotifyReq"
+		respBean="com.online.schedule.service.bean.httpmsg.FileUploadNotifyResp">
+	</function>
+	<function msgType="GET_USERGROUPS"
+		class="com.online.schedule.service.abilityInf.group.SelectGroupService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GroupInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GroupInfoResp">
+	</function>
+	<function msgType="GET_USERINFOS"
+		class="com.online.schedule.service.abilityInf.group.SelectGroupUserService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GroupUserReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GroupUserResp">
+	</function>
+	<function msgType="GET_SCORE_DETAIL"
+		class="com.online.schedule.service.abilityInf.classDynamic.GetScoreDetailService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetScoreDetailReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetScoreDetailResp">
+	</function>
+	<function msgType="GET_SCORE_NEW_DETAIL"
+		class="com.online.schedule.service.abilityInf.score.GetScoreNewDetailService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetScoreNewDetailReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetScoreNewDetailResp">
+	</function>
+	<function msgType="POST_SIGN_UP"
+		class="com.online.schedule.service.abilityInf.signup.PostSignUpService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostSignUpReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostSignUpResp">
+	</function>
+	<function msgType="GET_RECRUIT_INFO"
+		class="com.online.schedule.service.abilityInf.signup.GetRecruitInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetRecruitInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetRecruitInfoResponse">
+	</function>
+	<function msgType="GET_VIDEO_FILE_LIST"
+		class="com.online.schedule.service.abilityInf.video.VideoListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.VideoListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.VideoListResp">
+	</function>
+	<function msgType="GET_SCHOOL_INTROS"
+		class="com.online.schedule.service.abilityInf.schIntroduce.GetSchIntroduceListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.SchoolIntroduceReq"
+		respBean="com.online.schedule.service.bean.httpmsg.SchoolIntroduceResp">
+	</function>
+	<function msgType="GET_SCHOOL_LEADERS"
+		class="com.online.schedule.service.abilityInf.schLeader.GetSchLeaderService"
+		reqBean="com.online.schedule.service.bean.httpmsg.SchoolLeaderReq"
+		respBean="com.online.schedule.service.bean.httpmsg.SchoolLeaderResp">
+	</function>
+	<function msgType="GET_SCHOOL_SCENERYS"
+		class="com.online.schedule.service.abilityInf.schIntroduce.SchoolSenceListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.SchoolSenceReq"
+		respBean="com.online.schedule.service.bean.httpmsg.SchoolSenceResp">
+	</function>
+	<function msgType="GET_SCHOOL_INTROS"
+		class="com.online.schedule.service.abilityInf.schIntroduce.GetSchIntroduceListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.SchoolIntroduceReq"
+		respBean="com.online.schedule.service.bean.httpmsg.SchoolIntroduceResp">
+	</function>
+	<function msgType="GET_SCHOOL_HTML_DATA"
+		class="com.online.schedule.service.abilityInf.schLeader.GetHtmlDataService"
+		reqBean="com.online.schedule.service.bean.httpmsg.HtmlDataReq"
+		respBean="com.online.schedule.service.bean.httpmsg.HtmlDataResp">
+	</function>
+	<function msgType="POST_SCHOOL_EDU_REVIEW"
+		class="com.online.schedule.service.abilityInf.eduReview.PublicEduReviewService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostSchEduReviewReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostSchEduReviewResp">
+	</function>
+	<function msgType="GET_SCHOOL_EDU_REVIEW_LIST"
+		class="com.online.schedule.service.abilityInf.eduReview.GetEduReviewListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.SchoolEduReviewReq"
+		respBean="com.online.schedule.service.bean.httpmsg.SchoolEduReviewResp">
+	</function>
+	<function msgType="DELETE_SCHOOL_EDU_REVIEW"
+		class="com.online.schedule.service.abilityInf.eduReview.DelEduReviewService"
+		reqBean="com.online.schedule.service.bean.httpmsg.DelEduReviewReq"
+		respBean="com.online.schedule.service.bean.httpmsg.DelEduReviewResp">
+	</function>
+	<function msgType="GET_SCHOOL_NEWS"
+		class="com.online.schedule.service.abilityInf.news.GetSchoolNewsService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetSchoolNewsReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetSchoolNewsResponse">
+	</function>
+	<function msgType="GET_SCHOOL_NEW_DETAIL"
+		class="com.online.schedule.service.abilityInf.news.GetSchoolNewDetailService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetSchoolNewDetailReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetSchoolNewDetailResponse">
+	</function>
+	<function msgType="GET_SCHOOL_NOTICE"
+		class="com.online.schedule.service.abilityInf.schoolnotice.GetSchoolNoticeService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetSchoolNoticeReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetSchoolNoticeResponse">
+	</function>
+	<function msgType="POST_CLASS_NOTICE"
+		class="com.online.schedule.service.abilityInf.schoolnotice.PostClassNoticeService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostClassNoticeReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostClassNoticeResp">
+	</function>
+	<function msgType="DELETE_CLASS_NOTICE"
+		class="com.online.schedule.service.abilityInf.schoolnotice.DeleteClassNoticeService"
+		reqBean="com.online.schedule.service.bean.httpmsg.DeleteClassNoticeReq"
+		respBean="com.online.schedule.service.bean.httpmsg.DeleteClassNoticeResp">
+	</function>
+	<function msgType="GET_WEEKLY_WORK"
+		class="com.online.schedule.service.abilityInf.weeklywork.GetWeeklyWorkService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetWeeklyWorkReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetWeeklyWorkResp">
+	</function>
+	<function msgType="GET_WEEKLY_WORK_DETAIL"
+		class="com.online.schedule.service.abilityInf.weeklywork.GetWeeklyWorkDetailService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetWeeklyWorkDetailReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetWeeklyWorkDetailResp">
+	</function>
+	<function msgType="GET_CLASS_WEEKLY_NOTICE"
+		class="com.online.schedule.service.abilityInf.weekNotice.GetClassWeeklyNoticeService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetClassWeeklyNoticeReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetClassWeeklyNoticeResp">
+	</function>
+	<function msgType="GET_CONSUME_NOW"
+		class="com.online.schedule.service.abilityInf.eCard.GetConsumeNowService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetConsumeNowReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetConsumeNowResp">
+	</function>
+	<function msgType="GET_CONSUME_HISTORY"
+		class="com.online.schedule.service.abilityInf.eCard.GetConsumeHistoryService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetConsumeHistoryReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetConsumeHistoryResp">
+	</function>
+	<function msgType="GET_SMS_INVITE_CODE"
+		class="com.online.schedule.service.abilityInf.sms.GetSmsInviteCodeService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetSmsInviteCodeReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetSmsInviteCodeResp">
+	</function>
+	<function msgType="INVITE_FAMILY_MEMBER"
+		class="com.online.schedule.service.abilityInf.user.InviteFamiMemberService"
+		reqBean="com.online.schedule.service.bean.httpmsg.InviteFamiMemberReq"
+		respBean="com.online.schedule.service.bean.httpmsg.InviteFamiMemberResp">
+	</function>
+	<function msgType="UNBIND_ACCOUNT"
+		class="com.online.schedule.service.abilityInf.account.UnbindAccountService"
+		reqBean="com.online.schedule.service.bean.httpmsg.UnbindAccountReq"
+		respBean="com.online.schedule.service.bean.httpmsg.UnbindAccountResp">
+	</function>
+	<function msgType="GET_SMS_VALI_CODE"
+		class="com.online.schedule.service.abilityInf.sms.GetSmsValiCodeService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetSmsValiCodeReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetSmsValiCodeResp">
+	</function>
+	<function msgType="BIND_ACCOUNT"
+		class="com.online.schedule.service.abilityInf.account.BindAccountService"
+		reqBean="com.online.schedule.service.bean.httpmsg.BindAccountReq"
+		respBean="com.online.schedule.service.bean.httpmsg.BindAccountResp">
+	</function>
+	<function msgType="GET_USER_INFO"
+		class="com.online.schedule.service.abilityInf.user.GetUserInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetUserInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetUserInfoResp">
+	</function>
+	<function msgType="GET_RESOURCE"
+		class="com.online.schedule.service.abilityInf.user.GetResourceService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetResourceReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetResourceResp">
+	</function>
+	<function msgType="LOGOUT_RESOURCE"
+		class="com.online.schedule.service.abilityInf.user.LogOutService"
+		reqBean="com.online.schedule.service.bean.httpmsg.LogOutReq" respBean="com.online.schedule.service.bean.httpmsg.LogOutResp">
+	</function>
+	<function msgType="GET_PLAT_INFO"
+		class="com.online.schedule.service.abilityInf.user.GetPlatInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetPlatInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetPlatInfoResp">
+	</function>
+	<function msgType="ABOUT_INFO"
+		class="com.online.schedule.service.abilityInf.user.AboutInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.AboutInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.AboutInfoResp">
+	</function>
+	<function msgType="GET_CLASS_LIST"
+		class="com.online.schedule.service.abilityInf.classInfo.GetAllClassInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetClassListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetClassListResp">
+	</function>
+	<function msgType="POST_PUSH_INFO"
+		class="com.online.schedule.service.abilityInf.user.PostPushInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostPushInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostPushInfoResp">
+	</function>
+	<function msgType="PUBLISH_DIARY"
+		class="com.online.schedule.service.abilityInf.diary.PublishDiaryService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PublishDiaryReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PublishDiaryResp">
+	</function>
+	<function msgType="GET_DIARY_LIST"
+		class="com.online.schedule.service.abilityInf.diary.GetDiaryListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetDiaryListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetDiaryListResp">
+	</function>
+	<function msgType="DELETE_DIARY"
+		class="com.online.schedule.service.abilityInf.diary.DeleteDiaryService"
+		reqBean="com.online.schedule.service.bean.httpmsg.DeleteDiaryReq"
+		respBean="com.online.schedule.service.bean.httpmsg.DeleteDiaryResp">
+	</function>
+	<function msgType="GET_ECARD_RECHARGE_DETAIL"
+		class="com.online.schedule.service.abilityInf.eCard.GetEcardRechargeDetailService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetEcardRechargeDetailReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetEcardRechargeDetailResp">
+	</function>
+	<function msgType="GET_RECEIVE_LIST"
+		class="com.online.schedule.service.abilityInf.receive.GetReceiveListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetReceiveListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetReceiveListResp">
+	</function>
+	<function msgType="APP_PORTAL_AUTH"
+		class="com.online.schedule.service.abilityInf.portal.AppPortalAuthService"
+		reqBean="com.online.schedule.service.bean.httpmsg.AppPortalAuthReq"
+		respBean="com.online.schedule.service.bean.httpmsg.AppPortalAuthResp">
+	</function>
+	<function msgType="GET_VIDEO_PLAY_URL"
+		class="com.online.schedule.service.abilityInf.video.GetVideoPlayUrlService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetVideoPlayUrlReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetVideoPlayUrlResp">
+	</function>
+	<function msgType="GET_OSS_FEDERATION_TOKEN"
+		class="com.online.schedule.service.abilityInf.oss.GetOssFederationTokenService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetOssFederationTokenReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetOssFederationTokenResp">
+	</function>
+	<function msgType="GET_FUNCTION_DYNAMIC"
+		class="com.online.schedule.service.abilityInf.function.GetFunctionDynamicService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetFunctionDynamicReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetFunctionDynamicResp">
+	</function>
+	<function msgType="POST_LEAVE_INFO"
+		class="com.online.schedule.service.abilityInf.leave.PostLeaveInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostLeaveInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostLeaveInfoResp">
+	</function>
+	<function msgType="GET_LEAVE_LIST"
+		class="com.online.schedule.service.abilityInf.leave.GetLeaveListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetLeaveListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetLeaveListResp">
+	</function>
+	<function msgType="VERIFY_LEAVE_INFO"
+		class="com.online.schedule.service.abilityInf.leave.VerifyLeaveInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.VerifyLeaveInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.VerifyLeaveInfoResp">
+	</function>
+	<function msgType="GET_RECEIVE_STATISTICS"
+		class="com.online.schedule.service.abilityInf.receive.GetReceiveStatisticsService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetReceiveStatisticsReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetReceiveStatisticsResp">
+	</function>
+	<function msgType="GET_RECIPE_INFO"
+		class="com.online.schedule.service.abilityInf.recipe.GetRecipeInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetRecipeInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetRecipeInfoResp">
+	</function>
+	<function msgType="POST_RECIPE"
+		class="com.online.schedule.service.abilityInf.recipe.PostRecipeService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostRecipeReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostRecipeResp">
+	</function>
+	<function msgType="GET_SYLLABUS_LIST"
+		class="com.online.schedule.service.abilityInf.syllabus.GetSyllabusListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetSyllabusListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetSyllabusListResp">
+	</function>
+	<function msgType="POST_VOD"
+		class="com.online.schedule.service.abilityInf.video.AppPostVodService"
+		reqBean="com.online.schedule.service.bean.httpmsg.AppPostVodInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.AppPostVodInfoResp">
+	</function>
+	<function msgType="POST_MOBILE_FILE_INFO"
+		class="com.online.schedule.service.abilityInf.oss.PostMobileFileInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostMobileFileInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostMobileFileInfoResp">
+	</function>
+	<function msgType="POST_HOMEWORK"
+		class="com.online.schedule.service.abilityInf.homework.PostHomeworkService"
+		reqBean="com.online.schedule.service.bean.httpmsg.PostHomeworkReq"
+		respBean="com.online.schedule.service.bean.httpmsg.PostHomeworkResp">
+	</function>
+	<function msgType="COMLETE_HOMEWORK"
+		class="com.online.schedule.service.abilityInf.homework.CompleteHomeworkService"
+		reqBean="com.online.schedule.service.bean.httpmsg.CompleteHomeworkReq"
+		respBean="com.online.schedule.service.bean.httpmsg.CompleteHomeworkResp">
+	</function>
+	<function msgType="REVIEW_HOMEWORK_COMPLETION"
+		class="com.online.schedule.service.abilityInf.homework.ReviewHomeworkService"
+		reqBean="com.online.schedule.service.bean.httpmsg.ReviewHomeworkReq"
+		respBean="com.online.schedule.service.bean.httpmsg.ReviewHomeworkResp">
+	</function>
+	<function msgType="DELETE_HOMEWORK"
+		class="com.online.schedule.service.abilityInf.homework.DeleteHomeworkService"
+		reqBean="com.online.schedule.service.bean.httpmsg.DeleteHomeworkReq"
+		respBean="com.online.schedule.service.bean.httpmsg.DeleteHomeworkResp">
+	</function>
+	<function msgType="GET_HOMEWORK_LIST"
+		class="com.online.schedule.service.abilityInf.homework.HomeworkListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetHomeworkListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetHomeworkListResp">
+	</function>
+	<function msgType="GET_HOMEWORK_DETAIL"
+		class="com.online.schedule.service.abilityInf.homework.GetHomeworkDetailService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetHomeworkDetailReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetHomeworkDetailResp">
+	</function>
+	<function msgType="GET_COMPLETION_DETAIL"
+		class="com.online.schedule.service.abilityInf.homework.GetCompletionDetailService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetCompletionDetailReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetCompletionDetailResp">
+	</function>
+	<function msgType="GET_HOMEWORK_READ_STATE"
+		class="com.online.schedule.service.abilityInf.homework.GetHomeworkReadStateService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetHomeworkReadStateReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetHomeworkReadStateResp">
+	</function>
+	<function msgType="GET_HOMEWORK_COMPLETION"
+		class="com.online.schedule.service.abilityInf.homework.GetHomeworkCompletionService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetHomeworkCompletionReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetHomeworkCompletionResp">
+	</function>
+	<function msgType="REMIND_HOMEWORK"
+		class="com.online.schedule.service.abilityInf.homework.RemindHomeworkService"
+		reqBean="com.online.schedule.service.bean.httpmsg.RemindHomeworkReq"
+		respBean="com.online.schedule.service.bean.httpmsg.RemindHomeworkResp">
+	</function>
+	<function msgType="GET_RESOURCE_GROUPS"
+		class="com.online.schedule.service.abilityInf.resource.GetResourceGroupService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetResourceGroupsReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetResourceGroupsResp">
+	</function>
+	<function msgType="GET_RESOURCE_LIST"
+		class="com.online.schedule.service.abilityInf.resource.GetResourceListService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetResourceListReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetResourceListResp">
+	</function>
+	<function msgType="GET_RESOURCE_URL"
+		class="com.online.schedule.service.abilityInf.resource.GetResourceUrlService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetResourceUrlReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetResourceUrlResp">
+	</function>
+	<function msgType="GET_CHILD_EDU_NEWS"
+		class="com.online.schedule.service.abilityInf.childedunews.GetChildEduNewsService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetChildEduNewsReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetChildEduNewsResp">
+	</function>
+	<function msgType="QUERY_USER_SUB_STATUS"
+		class="com.online.schedule.service.abilityInf.service.QryUserSubStatusService"
+		reqBean="com.online.schedule.service.bean.httpmsg.QryUserSubStatusReq"
+		respBean="com.online.schedule.service.bean.httpmsg.QryUserSubStatusResp">
+	</function>
+	<function msgType="QUERY_CAN_SUB_PACKAGE"
+		class="com.online.schedule.service.abilityInf.service.QryUserCanSubPackageService"
+		reqBean="com.online.schedule.service.bean.httpmsg.QryUserCanSubPackageReq"
+		respBean="com.online.schedule.service.bean.httpmsg.QryUserCanSubPackageResp">
+	</function>
+	<function msgType="ORDER_PACKAGE"
+		class="com.online.schedule.service.abilityInf.service.OrderPackageService"
+		reqBean="com.online.schedule.service.bean.httpmsg.OrderPackageReq"
+		respBean="com.online.schedule.service.bean.httpmsg.OrderPackageResp">
+	</function>
+	<function msgType="QRY_SERVICE_ORDER_INFO"
+		class="com.online.schedule.service.abilityInf.service.QryServiceOrderInfoService"
+		reqBean="com.online.schedule.service.bean.httpmsg.QryServiceOrderInfoReq"
+		respBean="com.online.schedule.service.bean.httpmsg.QryServiceOrderInfoResp">
+	</function>
+	<function msgType="QUERY_MY_SUB_PACKAGE"
+		class="com.online.schedule.service.abilityInf.service.QryMySubPackageService"
+		reqBean="com.online.schedule.service.bean.httpmsg.QryMySubPackageReq"
+		respBean="com.online.schedule.service.bean.httpmsg.QryMySubPackageResp">
+	</function>
+	<function msgType="MOD_FAMILY_MEMBER_INFO"
+		class="com.online.schedule.service.abilityInf.user.ModFamiMemberService"
+		reqBean="com.online.schedule.service.bean.httpmsg.ModFamiMemberReq"
+		respBean="com.online.schedule.service.bean.httpmsg.ModFamiMemberResp">
+	</function>
+	<function msgType="ORDER_CALC_PRICE"
+		class="com.online.schedule.service.abilityInf.service.OrderCalcPriceService"
+		reqBean="com.online.schedule.service.bean.httpmsg.OrderCalcPriceServiceReq"
+		respBean="com.online.schedule.service.bean.httpmsg.OrderCalcPriceServiceResp">
+	</function>
+	<function msgType="GET_SEND_MEMBER_SMS"
+		class="com.online.schedule.service.abilityInf.service.GetSendMemberSMSService"
+		reqBean="com.online.schedule.service.bean.httpmsg.GetSendMemberSMSReq"
+		respBean="com.online.schedule.service.bean.httpmsg.GetSendMemberSMSResp">
+	</function>
+</config>

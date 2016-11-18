@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="PersonFailResendInfo">
+	<resultMap type="com.allcam.pojo.PersonFailResendInfo" id="PersonFailResendInfoResult">
+		<result column="Id" jdbcType="VARCHAR" property="id" />
+		<result column="resendId" jdbcType="VARCHAR" property="resendId" />
+		<result column="NURID" jdbcType="VARCHAR" property="nurId" />
+		<result column="bpcUrl" jdbcType="VARCHAR" property="bpcUrl" />
+		<result column="filePath" jdbcType="VARCHAR" property="filePath" />
+		<result column="userType" jdbcType="VARCHAR" property="userType" />
+		<result column="userData" jdbcType="VARCHAR" property="userData" />
+		<result column="studentData" jdbcType="VARCHAR" property="studentData" />
+		<result column="receiveId" jdbcType="VARCHAR" property="receiveId" />
+		<result column="isModPhoto" jdbcType="INTEGER" property="isModPhoto" />
+		<result column="status" jdbcType="INTEGER" property="status" />
+		<result column="resendCount" jdbcType="INTEGER" property="resendCount" />
+	</resultMap>
+	<select id="queryPersonFailResendInfo" parameterType="com.allcam.pojo.PersonFailResendInfo"
+		resultMap="PersonFailResendInfoResult">
+		select * from tbl_fail_resend_info
+		<where>
+			status=0
+			<if test="nurId != null and !&quot;&quot;.equals(nurId.trim())">
+				and nurId=#{nurId}
+			</if>
+		</where>
+		order by id asc LIMIT 0,${pageSize}
+	</select>
+
+	<select id="queryPersonFailResendInfoByReceiveId" parameterType="com.allcam.pojo.PersonFailResendInfo"
+		resultMap="PersonFailResendInfoResult">
+		select * from tbl_fail_resend_info where
+		receiveId=#{receiveId}
+	</select>
+
+	<insert id="addPersonFailResendInfo" parameterType="com.allcam.pojo.PersonFailResendInfo">
+		insert
+		tbl_fail_resend_info(resendId,NURID,bpcUrl,filePath,userType,userData,studentData,receiveId,isModPhoto,exceptionMsg)
+		values(#{resendId},#{nurId},#{bpcUrl},#{filePath},#{userType},#{userData},#{studentData},#{receiveId},#{isModPhoto},#{exceptionMsg})
+	</insert>
+
+	<update id="modPersonFailResendInfo" parameterType="com.allcam.pojo.PersonFailResendInfo">
+		update
+		tbl_fail_resend_info set
+		receiveId=#{receiveId},isModPhoto=#{isModPhoto},status=#{status},resendCount=#{resendCount},exceptionMsg=#{exceptionMsg}
+		where
+		resendId=#{resendId}
+	</update>
+
+	<delete id="delPersonFailResendInfo" parameterType="com.allcam.pojo.PersonFailResendInfo">
+		delete from
+		tbl_fail_resend_info where
+		resendId=#{resendId}
+	</delete>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TaideChannelRecordInfo">
+
+	<resultMap type="com.allcam.pojo.TaideChannelRecordInfo" id="TaideChannelRecordInfoResult">
+		<result column="tgID" jdbcType="INTEGER" property="tgID" />
+		<result column="client" jdbcType="VARCHAR" property="client" />
+		<result column="channel" jdbcType="VARCHAR" property="channel" />
+		<result column="perInfo" jdbcType="VARCHAR" property="perInfo" />
+		<result column="Dept" jdbcType="VARCHAR" property="dept" />
+		<result column="PDEPT" jdbcType="VARCHAR" property="pdept" />
+		<result column="credNO1" jdbcType="VARCHAR" property="credNO1" />
+		<result column="serialNo" jdbcType="VARCHAR" property="serialNo" />
+		<result column="tgStatus" jdbcType="VARCHAR" property="tgStatus" />
+		<result column="tgTime" jdbcType="DATE" property="tgTime" />
+		<result column="inOut" jdbcType="VARCHAR" property="inOut" />
+		<result column="upFlag" jdbcType="VARCHAR" property="upFlag" />
+		<result column="upDT" jdbcType="VARCHAR" property="upDT" />
+		<result column="blReason" jdbcType="VARCHAR" property="blReason" />
+		<result column="blDT" jdbcType="VARCHAR" property="blDT" />
+		<result column="buluOper" jdbcType="VARCHAR" property="buluOper" />
+		<result column="capturePhotoPath_Front" jdbcType="VARCHAR" property="capturePhotoPath_Front" />
+		<result column="capturePhotoPath_Back" jdbcType="VARCHAR" property="capturePhotoPath_Back" />
+		<result column="passRoomID" jdbcType="VARCHAR" property="passRoomID" />
+		<result column="PiMobilePhone1" jdbcType="VARCHAR" property="piMobilePhone1" />
+	</resultMap>
+
+
+	<select id="queryTaideChannelRecordInfo" parameterType="com.allcam.pojo.TaideChannelRecordInfo"
+		resultType="com.allcam.pojo.TaideChannelRecordInfo" statementType="STATEMENT">
+		SELECT TOP ${pageSize} *,(select d.PDEPT from TBCHA_DEPT d where d.DEPTID=p.DEPT) as PDEPT FROM TBCHA_CHANNELTG c left join TBCHA_PERINFO p on p.PIID=c.PERINFO where TGSTATUS='2_1' and tgID>${tgID}
+		<if test="serialNo!=null and !&quot;&quot;.equals(serialNo.trim())">
+			AND serialNo=#{serialNo}
+		</if>
+		<if test="tgTime!=null and !&quot;&quot;.equals(tgTime.trim())">
+			AND tgTime=#{tgTime}
+		</if>
+		order by tgID asc
+	</select>
+</mapper>

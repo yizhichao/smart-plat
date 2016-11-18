@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2009-2012 the original author or authors. Licensed under the 
+	Apache License, Version 2.0 (the "License"); you may not use this file except 
+	in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+	Unless required by applicable law or agreed to in writing, software distributed 
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for 
+	the specific language governing permissions and limitations under the License. -->
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StudentInfo">
+	<resultMap type="com.allcam.pojo.StudentInfo" id="StudentInfoResult">
+		<result column="id" jdbcType="INTEGER" property="id" />
+		<result column="organizationId" jdbcType="VARCHAR" property="organizationId" />
+		<result column="schoolId" jdbcType="VARCHAR" property="schoolId" />
+		<result column="cardId" jdbcType="VARCHAR" property="cardId" />
+		<result column="userId" jdbcType="VARCHAR" property="userId" />
+		<result column="userName" jdbcType="VARCHAR" property="userName" />
+		<result column="displayName" jdbcType="VARCHAR" property="displayName" />
+		<result column="userPhoto" jdbcType="VARCHAR" property="userPhoto" />
+		<result column="studentId" jdbcType="VARCHAR" property="studentId" />
+		<result column="studentCode" jdbcType="VARCHAR" property="studentCode" />
+		<result column="studentName" jdbcType="VARCHAR" property="studentName" />
+		<result column="studentEnName" jdbcType="VARCHAR" property="studentEnName" />
+		<result column="studentCardId" jdbcType="VARCHAR" property="studentCardId" />
+		<result column="gender" jdbcType="VARCHAR" property="gender" />
+		<result column="gradeName" jdbcType="VARCHAR" property="gradeName" />
+		<result column="className" jdbcType="VARCHAR" property="className" />
+		<result column="photo" jdbcType="VARCHAR" property="photo" />
+		<result column="lastdate" jdbcType="VARCHAR" property="lastDate" />
+		<result column="SCHOOL_NAME" jdbcType="VARCHAR" property="schoolName" />
+	</resultMap>
+	<select id="queryDeviceSyncStudentByPage" parameterType="map"
+		resultMap="StudentInfoResult">
+		SELECT t2.*,t1.deviceId,t1.nurId FROM tbl_device_student_map
+		t1,tbl_student_info t2
+		WHERE t1.studentId=t2.studentId
+		and
+		t1.nurId=#{req.schoolId}
+		and
+		t1.deviceId=#{req.deviceId}
+		order by
+		t1.serialNum desc
+	</select>
+	<select id="getStudentInfoByCer" parameterType="com.allcam.pojo.StudentInfo"
+		resultMap="StudentInfoResult">
+		SELECT * from tbl_student_info where 1=1
+		<if test="cardId!=null and !&quot;&quot;.equals(cardId.trim())">
+			AND cardId=#{cardId}
+		</if>
+		<if test="schoolId!=null and !&quot;&quot;.equals(schoolId.trim())">
+			AND schoolId=#{schoolId}
+		</if>
+		<if test="studentId!=null and !&quot;&quot;.equals(studentId.trim())">
+			AND studentId=#{studentId}
+		</if>
+		<if test="userId!=null and !&quot;&quot;.equals(userId.trim())">
+			AND userId=#{userId}
+		</if>
+		<if test="studentCode!=null and !&quot;&quot;.equals(studentCode.trim())">
+			AND studentCode=#{studentCode}
+		</if>
+	</select>
+
+	<select id="queryStudentInfoByCardID" parameterType="com.allcam.pojo.StudentInfo"
+		resultMap="StudentInfoResult">
+		SELECT * from tbl_student_info where 1=1
+		<if test="cardId!=null and !&quot;&quot;.equals(cardId.trim())">
+			AND cardId=#{cardId}
+		</if>
+	</select>
+
+	<select id="queryStudentInfoByPage" parameterType="map"
+		resultMap="StudentInfoResult">
+		SELECT * from tbl_student_info where 1=1
+		<if
+			test="studentInfo.studentId!=null and !&quot;&quot;.equals(studentInfo.studentId.trim())">
+			AND studentId=#{studentInfo.studentId}
+		</if>
+		<if
+			test="studentInfo.schoolId!=null and !&quot;&quot;.equals(studentInfo.schoolId.trim())">
+			AND schoolId=#{studentInfo.schoolId}
+		</if>
+		<if
+			test="studentInfo.studentName!=null and !&quot;&quot;.equals(studentInfo.studentName.trim())">
+			AND studentName LIKE
+			'%${studentInfo.studentName}%'
+		</if>
+		<if
+			test="studentInfo.studentCode!=null and !&quot;&quot;.equals(studentInfo.studentCode.trim())">
+			AND StudentCODE LIKE
+			'%${studentInfo.studentCode}%'
+		</if>
+		order by lastdate desc
+	</select>
+
+	<select id="searchStudentInfoByPage" parameterType="map"
+		resultMap="StudentInfoResult">
+		SELECT * from tbl_student_info where 1=1
+		<if
+			test="studentInfo.studentId!=null and !&quot;&quot;.equals(studentInfo.studentId.trim())">
+			AND studentId=#{studentInfo.studentId}
+		</if>
+		<if
+			test="studentInfo.schoolId!=null and !&quot;&quot;.equals(studentInfo.schoolId.trim())">
+			AND schoolId=#{studentInfo.schoolId}
+		</if>
+		<if
+			test="studentInfo.studentName!=null and !&quot;&quot;.equals(studentInfo.studentName.trim())">
+			AND studentName LIKE
+			'%${studentInfo.studentName}%'
+		</if>
+		<if
+			test="studentInfo.studentCode!=null and !&quot;&quot;.equals(studentInfo.studentCode.trim())">
+			AND StudentCODE LIKE
+			'%${studentInfo.studentCode}%'
+		</if>
+		order by lastdate desc
+	</select>
+	<insert id="addStudentInfo" parameterType="com.allcam.pojo.StudentInfo">
+		replace into
+		tbl_student_info(schoolId,cardId,userId,userName,displayName,userPhoto,studentId,studentCode,studentName,gender,gradeName,className,photo,lastDate)
+		values(#{schoolId},#{cardId},#{userId},#{userName},#{displayName},#{userPhoto},#{studentId},#{studentCode},#{studentName},#{gender},#{gradeName},#{className},#{photo},#{lastDate})
+	</insert>
+
+	<update id="updateStudentInfo" parameterType="com.allcam.pojo.StudentInfo">
+		update tbl_student_info set cardId=#{cardId}
+		<if test="userName!=null and !&quot;&quot;.equals(userName.trim())">
+			,userName=#{userName}
+		</if>
+		<if test="displayName!=null and !&quot;&quot;.equals(displayName.trim())">
+			,displayName=#{displayName}
+		</if>
+		<if test="userPhoto!=null and !&quot;&quot;.equals(userPhoto.trim())">
+			,userPhoto=#{userPhoto}
+		</if>
+		<if test="studentId!=null and !&quot;&quot;.equals(studentId.trim())">
+			,studentId=#{studentId}
+		</if>
+		<if test="studentCode!=null and !&quot;&quot;.equals(studentCode.trim())">
+			,studentCode=#{studentCode}
+		</if>
+		<if test="studentName!=null and !&quot;&quot;.equals(studentName.trim())">
+			,studentName=#{studentName}
+		</if>
+		<if test="gender!=null and !&quot;&quot;.equals(gender.trim())">
+			,gender=#{gender}
+		</if>
+		<if test="gradeName!=null and !&quot;&quot;.equals(gradeName.trim())">
+			,gradeName=#{gradeName}
+		</if>
+		<if test="className!=null and !&quot;&quot;.equals(className.trim())">
+			,className=#{className}
+		</if>
+		<if test="photo!=null and !&quot;&quot;.equals(photo.trim())">
+			,photo=#{photo}
+		</if>
+		<if test="lastDate!=null and !&quot;&quot;.equals(lastDate.trim())">
+			,lastDate=#{lastDate}
+		</if>
+		where schoolId=#{schoolId} and studentId=#{studentId}
+		<if test="userId!=null and !&quot;&quot;.equals(userId.trim())">
+			and userId=#{userId}
+		</if>
+	</update>
+	<delete id="delStudentInfo" parameterType="com.allcam.pojo.StudentInfo">
+		delete from
+		tbl_student_info
+		where
+		studentId=#{studentId}
+	</delete>
+
+	<select id="queryStudentInfo" parameterType="map" resultMap="StudentInfoResult">
+		SELECT
+		s.*,t.SCHOOL_NAME
+		FROM tbl_student_info s,tbl_school_info t WHERE
+		s.schoolId=t.SCHOOL_ID
+		<if test="aoData!=null">
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (s.cardId like "%"#{aoData.sSearch}"%" OR s.studentName
+				like "%"#{aoData.sSearch}"%" OR s.studentEnName like
+				"%"#{aoData.sSearch}"%" OR s.studentCode like
+				"%"#{aoData.sSearch}"%" OR s.userName like
+				"%"#{aoData.sSearch}"%" OR
+				t.SCHOOL_NAME like
+				"%"#{aoData.sSearch}"%" OR s.gradeName like
+				"%"#{aoData.sSearch}"%"
+				OR s.className like "%"#{aoData.sSearch}"%")
+			</if>
+			<if
+				test="aoData.sSortCol_!=null and !&quot;&quot;.equals(aoData.sSortCol_.trim())">
+				ORDER BY ${aoData.sSortCol_} ${aoData.sSortDir_}
+			</if>
+			LIMIT #{aoData.iDisplayStart},#{aoData.iDisplayLength}
+		</if>
+	</select>
+
+	<select id="queryStudentTotal" parameterType="map" resultType="Integer">
+		SELECT
+		count(1)
+		FROM tbl_student_info s,tbl_school_info t WHERE
+		s.schoolId=t.SCHOOL_ID
+		<if test="aoData!=null">
+			<if
+				test="aoData.sSearch!=null and !&quot;&quot;.equals(aoData.sSearch.trim())">
+				AND (s.cardId like "%"#{aoData.sSearch}"%" OR s.studentName
+				like "%"#{aoData.sSearch}"%" OR s.studentEnName like
+				"%"#{aoData.sSearch}"%" OR s.studentCode like
+				"%"#{aoData.sSearch}"%" OR s.userName like
+				"%"#{aoData.sSearch}"%" OR
+				t.SCHOOL_NAME like
+				"%"#{aoData.sSearch}"%" OR s.gradeName like
+				"%"#{aoData.sSearch}"%"
+				OR s.className like "%"#{aoData.sSearch}"%")
+			</if>
+		</if>
+	</select>
+</mapper>
