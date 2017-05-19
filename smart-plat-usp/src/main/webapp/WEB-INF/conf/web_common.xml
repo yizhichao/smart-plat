@@ -12,16 +12,16 @@
 		<smsMsg>
 			<!-- <sn>U0RLLUNLUy0wMTAtMDAzMzA=</sn>
 			<pwd>MDMwMDMx</pwd> -->
-			<sn>U0RLLUNLUy0wMTAtMDAxMzA=</sn>
-			<pwd>NjcxOTMy</pwd>
+			<sn>sn</sn>
+			<pwd>pwd</pwd>
 		</smsMsg>
 		<OSS>
 			<OSS_ENDPOINT_PUBLIC>http://oss-cn-hangzhou.aliyuncs.com/
 			</OSS_ENDPOINT_PUBLIC>
 			<OSS_ENDPOINT>http://oss-cn-hangzhou-internal.aliyuncs.com/
 			</OSS_ENDPOINT>
-			<ACCESS_ID>h8K5js7NEqfvdzWX</ACCESS_ID>
-			<ACCESS_KEY>ySsSEU6YR9HyBRiNJItWVTbR1ZUxub</ACCESS_KEY>
+			<ACCESS_ID>ACCESS_ID</ACCESS_ID>
+			<ACCESS_KEY>ACCESS_KEY</ACCESS_KEY>
 			<BUCKET>
 				<NAME>rainbowbridge</NAME>
 			</BUCKET>
